@@ -10,8 +10,29 @@ runtime: shiny
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## *Let's try some shall we*?
+## Project Overview
 
+For my second project, I wanted to explore dropout rates in Texas public schools. As a former high school math teacher, I worked with countless students, each with their own background, heritage and labels. A lot of those students struggled in high school, but luckily very few of them dropped out. 
+
+According to Texas Education Agency (TEA), there are a multitude of reasons for dropping out of high school. Here are some common reasons:
+
+- Poor attendance (attrition)
+- Entered into alternative GED (non-diploma) program
+- Not enough credits earned
+- Didn't pass Standardized Exams (STAAR)
+- Age being above the maximum limit
+- Expulsion
+- Incarceration
+- Being homeless
+- Deceased 
+
+I decided to focus on three main factors: Grade level, Race/Ethnicity, and student characteristics.
+
+Student characteristics include: Special Education, 504, Gifted and Talented (GT), At Risk, English Language Learner (ELL), dyslexic, ect.
+
+I scraped data from [TEA's Website](https://tea.texas.gov/) from 1998-2019 and analyzed the data. Here are my results. 
+
+***
 
 ```{r dropout, echo=FALSE}
 library(shiny)
@@ -24,8 +45,9 @@ load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Proj
 
 
 # Define UI for application that draws a histogram
-ui<-navbarPage("Exploratory Analysis",
+ui<-navbarPage("Exploring Dropout Rates By:",
            tabPanel("Grade Level",
+                    
                     sidebarLayout(
                         #Inputs: Select which inputs from the data we want to display
                         sidebarPanel(
@@ -43,15 +65,60 @@ ui<-navbarPage("Exploratory Analysis",
                             selectInput(inputId = "z", 
                                         label = "Color:",
                                         choices = c("Grade","School_Year"),
-                                        selected = "Grade")
+                                        selected = "Grade"),
+                            hr(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            p("Barplot Data"),
+                            
+                            selectInput(inputId = "j", 
+                                        label = "Female Dropouts by Grade Level",
+                                        choices = c("Fem_Grade_7","Fem_Grade_8","Fem_Grade_9","Fem_Grade_10","Fem_Grade_11","Fem_Grade_12"),
+                                        selected = "Fem_Grade_7"),
+                        
+                            
+                            selectInput(inputId = "i", 
+                                        label = "X-axis:",
+                                        choices = c("School_Year"), 
+                                        selected = "School_Year"),
+                            
+                            # Select Colors
+                            selectInput(inputId = "h", 
+                                        label = "Color",
+                                        choices =  c("red","green","blue","yellow","black"), 
+                                        selected = "black")
                         ),
                         
                         #Output: Type of plot
                         mainPanel(
                             plotOutput(outputId = "Graphic"),
+                            hr(),
                             plotOutput(outputId="Barplot"),
                         )
-                        
+
                     )
                 ),
 
@@ -120,9 +187,9 @@ server<-function(input, output) {
     })
     
     output$Barplot <- renderPlot({
-      school_year<-c("1998-99","1999-00","2000-01","2001-02","2002-03","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09","2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19")
+        ggplot(total4, aes_string(x=input$i, y=input$j)) + geom_col(color=input$h)
 
-barplot(total4$Female~school_year,main="Grade 7 Female Dropout rates from 1998-2019", xlab = "School Year",ylab="Female Dropout Rate",col="Salmon")
+
     })
     
     output$Graphic2 <- renderPlot({
@@ -142,17 +209,3 @@ barplot(total4$Female~school_year,main="Grade 7 Female Dropout rates from 1998-2
 shinyApp(ui = ui, server = server)
 
 ```
-
-### Let's try something else
-
-If I want to write a sentence about my project, I could write it here and the audience will enjoy a little bit of light reading. 
-
-```{r barplot, echo=FALSE}
-school_year<-c("1998-99","1999-00","2000-01","2001-02","2002-03","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09","2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19")
-
-barplot(total4$Female~school_year,main="Grade 7 Female Dropout rates from 1998-2019", xlab = "School Year",ylab="Female Dropout Rate",col="Salmon")
-```
-
-
-## Male Vs Female Comparison using Boxplots
-
