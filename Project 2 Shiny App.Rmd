@@ -51,18 +51,21 @@ ui<-navbarPage("Exploring Dropout Rates By:",
                     sidebarLayout(
                         #Inputs: Select which inputs from the data we want to display
                         sidebarPanel(
+                          br(),
+                          br(),
+                          br(),
                             #Select variable for y-axis
-                            selectInput(inputId = "y", 
+                            selectInput(inputId = "a", 
                                         label = "Y-axis:",
                                         choices = c("Female","Female_Percentage","Male","Male_Percentage","State","State_Percentage"), 
                                         selected = "Female"),
                             #Select X-axis variables
-                            selectInput(inputId = "x", 
+                            selectInput(inputId = "b", 
                                         label = "X-axis:",
                                         choices = c("School_Year","Grade"), 
                                         selected = "School_Year"),
                             #Select Grade Level
-                            selectInput(inputId = "z", 
+                            selectInput(inputId = "c", 
                                         label = "Color:",
                                         choices = c("Grade","School_Year"),
                                         selected = "Grade"),
@@ -92,31 +95,81 @@ ui<-navbarPage("Exploring Dropout Rates By:",
                             
                             br(),
                             
-                            p("Barplot Data"),
                             
-                            selectInput(inputId = "j", 
-                                        label = "Female Dropouts by Grade Level",
+                            selectInput(inputId = "d", 
+                                        label = "Y-Axis:",
                                         choices = c("Fem_Grade_7","Fem_Grade_8","Fem_Grade_9","Fem_Grade_10","Fem_Grade_11","Fem_Grade_12"),
                                         selected = "Fem_Grade_7"),
                         
                             
-                            selectInput(inputId = "i", 
+                            selectInput(inputId = "e", 
                                         label = "X-axis:",
                                         choices = c("School_Year"), 
                                         selected = "School_Year"),
                             
                             # Select Colors
+                            selectInput(inputId = "f", 
+                                        label = "Color",
+                                        choices =  c("red","green","blue","yellow","black"), 
+                                        selected = "black"),
+                            
+                            hr(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            
+                            selectInput(inputId = "g", 
+                                        label = "Y-Axis:",
+                                        choices = c("Male_Grade_7","Male_Grade_8","Male_Grade_9","Male_Grade_10","Male_Grade_11","Male_Grade_12"),
+                                        selected = "Male_Grade_7"),
+                        
+                            
                             selectInput(inputId = "h", 
+                                        label = "X-axis:",
+                                        choices = c("School_Year"), 
+                                        selected = "School_Year"),
+                            
+                            # Select Colors
+                            selectInput(inputId = "i", 
                                         label = "Color",
                                         choices =  c("red","green","blue","yellow","black"), 
                                         selected = "black")
                         ),
                         
+                        
                         #Output: Type of plot
                         mainPanel(
+                            titlePanel("Dropout Rates from 1998-2019"),
                             plotOutput(outputId = "Graphic"),
                             hr(),
+                            titlePanel("Female Dropout Rate by Grade Level"),
                             plotOutput(outputId="Barplot"),
+                            hr(),
+                            titlePanel("Male Dropout Rate by Grade Level"),
+                            plotOutput(outputId="Barplot1")
+
                         )
 
                     )
@@ -127,17 +180,17 @@ ui<-navbarPage("Exploring Dropout Rates By:",
                         #Inputs: Select which inputs from the data we want to display
                         sidebarPanel(
                             #Select variable for y-axis
-                            selectInput(inputId = "a", 
+                            selectInput(inputId = "j", 
                                         label = "Y-axis:",
                                         choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"), 
                                         selected = "Female_Dropouts"),
                             #Select X-axis variables
-                            selectInput(inputId = "b", 
+                            selectInput(inputId = "k", 
                                         label = "X-axis:",
                                         choices = c("School_Year","Grade_Level"), 
                                         selected = "School_Year"),
                             #Select Grade Level
-                            selectInput(inputId = "c", 
+                            selectInput(inputId = "l", 
                                         label = "Color:",
                                         choices = c("Race","Grade_Level"),
                                         selected = "Race")
@@ -155,17 +208,17 @@ ui<-navbarPage("Exploring Dropout Rates By:",
                         #Inputs: Select which inputs from the data we want to display
                         sidebarPanel(
                             #Select variable for y-axis
-                            selectInput(inputId = "d", 
+                            selectInput(inputId = "m", 
                                         label = "Y-axis:",
                                         choices = c("Students","Students_Percentage","Dropouts","Dropouts_Percentage","Annual_Dropout_Rate","Male_Dropouts_Percentage"), 
                                         selected = "Dropouts"),
                             #Select X-axis variables
-                            selectInput(inputId = "e", 
+                            selectInput(inputId = "n", 
                                         label = "X-axis:",
                                         choices = c("School_Year","Groups"), 
                                         selected = "School_Year"),
                             #Select Grade Level
-                            selectInput(inputId = "f", 
+                            selectInput(inputId = "o", 
                                         label = "Color:",
                                         choices = c("Groups","School_Year"),
                                         selected = "Groups")
@@ -182,24 +235,26 @@ ui<-navbarPage("Exploring Dropout Rates By:",
 server<-function(input, output) {
     output$Graphic <- renderPlot({
         # draw the histogram with the specified number of bins
-        ggplot(total1, aes_string(x=input$x, y=input$y,col=input$z)) + geom_jitter()
+        ggplot(total1, aes_string(x=input$b, y=input$a,col=input$c)) + geom_jitter()
       #Notice the difference between the ggplots
     })
     
     output$Barplot <- renderPlot({
-        ggplot(total4, aes_string(x=input$i, y=input$j)) + geom_col(color=input$h)
-
-
+        ggplot(total4, aes_string(x=input$e, y=input$d)) + geom_col(color=input$f)
+    })
+    
+     output$Barplot1 <- renderPlot({
+        ggplot(total4, aes_string(x=input$h, y=input$g)) + geom_col(color=input$i)
     })
     
     output$Graphic2 <- renderPlot({
         # draw the histogram with the specified number of bins
-        ggplot(total5, aes_string(x=input$b, y=input$a,col=input$c)) + geom_jitter() #Notice the difference between the ggplots
+        ggplot(total5, aes_string(x=input$k, y=input$j,col=input$l)) + geom_jitter() #Notice the difference between the ggplots
     })
     
     output$Graphic3 <- renderPlot({
         # draw the histogram with the specified number of bins
-        ggplot(total8, aes_string(x=input$e, y=input$d,col=input$f)) + geom_jitter() #Notice the difference between the ggplots
+        ggplot(total8, aes_string(x=input$n, y=input$m,col=input$o)) + geom_jitter() #Notice the difference between the ggplots
     })
 }
 

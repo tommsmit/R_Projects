@@ -474,11 +474,12 @@ ggplot(total4, aes(x=School_Year, y =Fem_Grade_8)) + geom_col()
 
 mycolor<-rep(c("red","blue"),6)
 
+
 #Boxplot Comparing Male/Female Dropout Rate by Grade-Level
-boxplot(total4[,c(3,5,11,13,19,21,27,29,35,37,43,45)],main="Female Vs Male Dropout by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
+boxplot(total4[,c(3,5,12,14,20,22,28,30,36,38,44,46)],main="Female Vs Male Dropout by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
 legend("topleft",legend = c("Female", "Male"),col = mycolor,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
-boxplot(total4[,c(4,6,12,14,20,22,28,30,36,38,44,46)],main="Female Vs Male Dropout % by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
+boxplot(total4[,c(4,6,13,15,21,23,29,31,37,39,45,47)],main="Female Vs Male Dropout % by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
 legend("topleft",legend = c("Female", "Male"),col = mycolor,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #boxplot(total4[,c(3,12,21,30,39,48)],main="Female Dropout by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col="Yellow")
