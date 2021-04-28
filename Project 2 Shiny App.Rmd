@@ -10,7 +10,7 @@ runtime: shiny
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## Let's try some shall we?
+## *Let's try some shall we*?
 
 
 ```{r dropout, echo=FALSE}
@@ -18,55 +18,141 @@ library(shiny)
 library(ggplot2)
 #Load the Library
 load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total1.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total4.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total5.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total8.RData")
 
 
 # Define UI for application that draws a histogram
-ui <- fluidPage(
+ui<-navbarPage("Exploratory Analysis",
+           tabPanel("Grade Level",
+                    sidebarLayout(
+                        #Inputs: Select which inputs from the data we want to display
+                        sidebarPanel(
+                            #Select variable for y-axis
+                            selectInput(inputId = "y", 
+                                        label = "Y-axis:",
+                                        choices = c("Female","Female_Percentage","Male","Male_Percentage","State","State_Percentage"), 
+                                        selected = "Female"),
+                            #Select X-axis variables
+                            selectInput(inputId = "x", 
+                                        label = "X-axis:",
+                                        choices = c("School_Year","Grade"), 
+                                        selected = "School_Year"),
+                            #Select Grade Level
+                            selectInput(inputId = "z", 
+                                        label = "Color:",
+                                        choices = c("Grade","School_Year"),
+                                        selected = "Grade")
+                        ),
+                        
+                        #Output: Type of plot
+                        mainPanel(
+                            plotOutput(outputId = "Graphic"),
+                            plotOutput(outputId="Barplot"),
+                        )
+                        
+                    )
+                ),
 
-    # Application title
-    titlePanel("Female Vs Male Dropouts by Grade (7-12) from 1998-2019"),
-
-    # Sidebar layout
-    sidebarLayout(
-        #Inputs: Select which inputs from the data we want to display
-        sidebarPanel(
-            #Select variable for y-axis
-                  selectInput(inputId = "y", 
-                  label = "Y-axis:",
-                  choices = c("Female","Female_Percentage","Male","Male_Percentage","State","State_Percentage"), 
-                  selected = "Female"),
-            #Select X-axis variables
-                  selectInput(inputId = "x", 
-                  label = "X-axis:",
-                  choices = c("School_Year","Grade"), 
-                  selected = "School_Year"),
-            #Select Grade Level
-                  selectInput(inputId = "z", 
-                  label = "Color:",
-                  choices = c("Grade","School_Year"),
-                  selected = "Grade")
-        ),
-
-        #Output: Type of plot
-        mainPanel(
-           plotOutput(outputId = "Graphic") #Any name can go where "FreqTab" is, but be sure to keep it consistent with name in output$FreqTab in the server section
-        )
-    )
+           tabPanel("Ethnicity/Race",
+                    sidebarLayout(
+                        #Inputs: Select which inputs from the data we want to display
+                        sidebarPanel(
+                            #Select variable for y-axis
+                            selectInput(inputId = "a", 
+                                        label = "Y-axis:",
+                                        choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"), 
+                                        selected = "Female_Dropouts"),
+                            #Select X-axis variables
+                            selectInput(inputId = "b", 
+                                        label = "X-axis:",
+                                        choices = c("School_Year","Grade_Level"), 
+                                        selected = "School_Year"),
+                            #Select Grade Level
+                            selectInput(inputId = "c", 
+                                        label = "Color:",
+                                        choices = c("Race","Grade_Level"),
+                                        selected = "Race")
+                        ),
+                        
+                        #Output: Type of plot
+                        mainPanel(
+                            plotOutput(outputId = "Graphic2"),
+                        )
+                    )
+           ),
+           
+           tabPanel("Student Characteristics",
+                    sidebarLayout(
+                        #Inputs: Select which inputs from the data we want to display
+                        sidebarPanel(
+                            #Select variable for y-axis
+                            selectInput(inputId = "d", 
+                                        label = "Y-axis:",
+                                        choices = c("Students","Students_Percentage","Dropouts","Dropouts_Percentage","Annual_Dropout_Rate","Male_Dropouts_Percentage"), 
+                                        selected = "Dropouts"),
+                            #Select X-axis variables
+                            selectInput(inputId = "e", 
+                                        label = "X-axis:",
+                                        choices = c("School_Year","Groups"), 
+                                        selected = "School_Year"),
+                            #Select Grade Level
+                            selectInput(inputId = "f", 
+                                        label = "Color:",
+                                        choices = c("Groups","School_Year"),
+                                        selected = "Groups")
+                        ),
+                        
+                        #Output: Type of plot
+                        mainPanel(
+                            plotOutput(outputId = "Graphic3"),
+                        )
+                    )
+           )
 )
 
-# Define server logic required to draw a histogram
-server <- function(input, output) {
-
+server<-function(input, output) {
     output$Graphic <- renderPlot({
         # draw the histogram with the specified number of bins
-      ggplot(total1, aes_string(x=input$x, y=input$y,col=input$z)) + geom_jitter() #Notice the difference between the ggplots
+        ggplot(total1, aes_string(x=input$x, y=input$y,col=input$z)) + geom_jitter()
+      #Notice the difference between the ggplots
+    })
+    
+    output$Barplot <- renderPlot({
+      school_year<-c("1998-99","1999-00","2000-01","2001-02","2002-03","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09","2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19")
+
+barplot(total4$Female~school_year,main="Grade 7 Female Dropout rates from 1998-2019", xlab = "School Year",ylab="Female Dropout Rate",col="Salmon")
+    })
+    
+    output$Graphic2 <- renderPlot({
+        # draw the histogram with the specified number of bins
+        ggplot(total5, aes_string(x=input$b, y=input$a,col=input$c)) + geom_jitter() #Notice the difference between the ggplots
+    })
+    
+    output$Graphic3 <- renderPlot({
+        # draw the histogram with the specified number of bins
+        ggplot(total8, aes_string(x=input$e, y=input$d,col=input$f)) + geom_jitter() #Notice the difference between the ggplots
     })
 }
+
+
 
 # Run the application 
 shinyApp(ui = ui, server = server)
 
 ```
+
+### Let's try something else
+
+If I want to write a sentence about my project, I could write it here and the audience will enjoy a little bit of light reading. 
+
+```{r barplot, echo=FALSE}
+school_year<-c("1998-99","1999-00","2000-01","2001-02","2002-03","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09","2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19")
+
+barplot(total4$Female~school_year,main="Grade 7 Female Dropout rates from 1998-2019", xlab = "School Year",ylab="Female Dropout Rate",col="Salmon")
+```
+
 
 ## Male Vs Female Comparison using Boxplots
 

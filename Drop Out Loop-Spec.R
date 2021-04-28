@@ -12,6 +12,7 @@ library(tictoc)
 library(tidyverse)
 require(XML)
 library(ggplot2)
+library(shiny)
 
 school_year<-(c("1998-99","1999-00","2000-01","2001-02","2002-03","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09","2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19"))
 drop_spec<-data.frame(Groups=character(),Students=numeric(), Students_Percentage=numeric(), Dropouts=numeric(), Dropouts_Percentage=numeric(), Annual_Dropout_Rate=numeric(), School_Year=character())
@@ -1067,15 +1068,14 @@ x21<-total_drop_spec[301:315,]
 
 
 
-total1<-cbind(x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21)
-total1<-total1[,c(-8,-15,-22,-29,-36,-34,-41,-48,-55,-62,-69,-76,-83,-90,-97,-104,-111,-118,-125,-132,-139)]
+total7<-cbind(x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12,x13,x14,x15,x16,x17,x18,x19,x20,x21)
+total7<-total7[,c(-8,-15,-22,-29,-36,-34,-41,-48,-55,-62,-69,-76,-83,-90,-97,-104,-111,-118,-125,-132,-139)]
 
 label<-c("ESL","CTE","GT","504","Sped","Title I","At Risk","Dyslexia","ELL","Foster","Homele","Immig","Mig","Military","Overg")
 
 #All Groups compared by Year
-barplot(total1$Dropouts_Percentage.20~label)
+barplot(total7$Dropouts_Percentage.20~label)
 
-total3<-arrange(total_drop_spec,Groups)
 
 
 #1998-2019 by Group
@@ -1098,29 +1098,36 @@ tot_Overage<-filter(total_drop_spec,Groups=="Overage")
 
 
 barplot(tot_ESL$Dropouts_Percentage~school_year)
-barplot(tot_CTE$Dropouts_Percentage~school_year)
+barplot(tot_CTE$Dropouts_Percentage)
 barplot(tot_GT$Dropouts_Percentage~school_year)
-barplot(tot_504$Dropouts_Percentage~school_year)
+barplot(tot_504$Dropouts_Percentage)
 barplot(tot_Spec$Dropouts_Percentage~school_year)
 barplot(tot_TitleI$Dropouts_Percentage~school_year)
 barplot(tot_AtRisk$Dropouts_Percentage~school_year)
-barplot(tot_Dys$Dropouts_Percentage~school_year)
+barplot(tot_Dys$Dropouts_Percentage)
 barplot(tot_ELL$Dropouts_Percentage~school_year)
-barplot(tot_Fost$Dropouts_Percentage~school_year)
-barplot(tot_Homeless$Dropouts_Percentage~school_year)
-barplot(tot_Immig$Dropouts_Percentage~school_year)
+barplot(tot_Fost$Dropouts_Percentage)
+barplot(tot_Homeless$Dropouts_Percentage)
+barplot(tot_Immig$Dropouts_Percentage)
 barplot(tot_Mig$Dropouts_Percentage~school_year)
-barplot(tot_Military$Dropouts_Percentage~school_year)
+barplot(tot_Military$Dropouts_Percentage)
 barplot(tot_Overage$Dropouts_Percentage~school_year)
 
-total3<-cbind(tot_ESL,tot_CTE,tot_GT,tot_504,tot_Spec,tot_TitleI,tot_AtRisk,tot_Dys,tot_ELL,tot_Fost,tot_Homeless,tot_Immig,tot_Mig,tot_Military,tot_Overage,check.names=T)
+total<-cbind(tot_ESL,tot_CTE,tot_GT,tot_504,tot_Spec,tot_TitleI,tot_AtRisk,tot_Dys,tot_ELL,tot_Fost,tot_Homeless,tot_Immig,tot_Mig,tot_Military,tot_Overage)
 
 
-total2<-filter(total_drop_spec,Groups!="Overage")
+total8<-filter(total_drop_spec,Groups!="Overage")
 
 
 
 ggplot(total_drop_spec, aes(x=School_Year, y =Dropouts_Percentage, label=Groups,col=Groups)) + geom_label()
-ggplot(total2, aes(x=School_Year, y =Dropouts_Percentage,col=Groups)) + geom_jitter()
-ggplot(total2, aes(x=School_Year, y =Dropouts_Percentage,col=Groups,label=Groups)) + geom_label()
+ggplot(total8, aes(x=School_Year, y =Dropouts_Percentage,col=Groups)) + geom_jitter()
+ggplot(total8, aes(x=School_Year, y =Dropouts_Percentage,col=Groups,label=Groups)) + geom_label()
+
+
+
+
+write.csv(total_drop_spec,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total_drop_spec.csv", row.names = FALSE)
+write.csv(total7,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total7.csv", row.names = FALSE)
+write.csv(total8,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total8.csv", row.names = FALSE)
 
