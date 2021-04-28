@@ -242,8 +242,8 @@ for (j in 1:length(school_year2)){
 total_drop_race_gender<-rbind(tot_02_09,tot_10_19)
 
 
-total1<-filter(total_drop_race_gender,Race!="Total")
-total2<-filter(total_drop_race_gender,Race=="Total")
+total5<-filter(total_drop_race_gender,Race!="Total")
+total6<-filter(total_drop_race_gender,Race=="Total")
 
 
 school_year<-c("2002-03","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09","2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19")
