@@ -239,16 +239,15 @@ for (j in 1:length(school_year2)){
   
 }
 
+tot_02_09<-filter(tot_02_09,Race!="Total")
 total_drop_race_gender<-rbind(tot_02_09,tot_10_19)
 
 
 total5<-filter(total_drop_race_gender,Race!="Total")
-total6<-filter(total_drop_race_gender,Race=="Total")
-
 
 school_year<-c("2002-03","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09","2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19")
 
-tot_Afr<-filter(total1,Race=="African-American")
+tot_Afr<-filter(total5,Race=="African-American")
 tot_Afr7<-filter(tot_Afr,Grade_Level=="7")
 tot_Afr8<-filter(tot_Afr,Grade_Level=="8")
 tot_Afr9<-filter(tot_Afr,Grade_Level=="9")
@@ -264,7 +263,7 @@ barplot(tot_Afr10$Female_Dropouts~school_year)
 barplot(tot_Afr11$Female_Dropouts~school_year)
 barplot(tot_Afr12$Female_Dropouts~school_year)
 
-tot_His<-filter(total1,Race=="Hispanic")
+tot_His<-filter(total5,Race=="Hispanic")
 tot_His7<-filter(tot_His,Grade_Level=="7")
 tot_His8<-filter(tot_His,Grade_Level=="8")
 tot_His9<-filter(tot_His,Grade_Level=="9")
@@ -280,7 +279,7 @@ barplot(tot_His10$Female_Dropouts~school_year)
 barplot(tot_His11$Female_Dropouts~school_year)
 barplot(tot_His12$Female_Dropouts~school_year)
 
-tot_Wh<-filter(total1,Race=="White")
+tot_Wh<-filter(total5,Race=="White")
 tot_Wh7<-filter(tot_Wh,Grade_Level=="7")
 tot_Wh8<-filter(tot_Wh,Grade_Level=="8")
 tot_Wh9<-filter(tot_Wh,Grade_Level=="9")
@@ -296,76 +295,31 @@ barplot(tot_Wh10$Female_Dropouts~school_year)
 barplot(tot_Wh11$Female_Dropouts~school_year)
 barplot(tot_Wh12$Female_Dropouts~school_year)
 
-tot_2002<-filter(tot_02_09,School_Year=="2002-03")
-tot_2003<-filter(tot_02_09,School_Year=="2003-04")
-tot_2004<-filter(tot_02_09,School_Year=="2004-05")
-tot_2005<-filter(tot_02_09,School_Year=="2005-06")
-tot_2006<-filter(tot_02_09,School_Year=="2006-07")
-tot_2007<-filter(tot_02_09,School_Year=="2007-08")
-tot_2008<-filter(tot_02_09,School_Year=="2008-09")
-tot_2009<-filter(tot_10_19,School_Year=="2009-10")
-tot_2010<-filter(tot_10_19,School_Year=="2010-11")
-tot_2011<-filter(tot_10_19,School_Year=="2011-12")
-tot_2012<-filter(tot_10_19,School_Year=="2012-13")
-tot_2013<-filter(tot_10_19,School_Year=="2013-14")
-tot_2014<-filter(tot_10_19,School_Year=="2014-15")
-tot_2015<-filter(tot_10_19,School_Year=="2015-16")
-tot_2016<-filter(tot_10_19,School_Year=="2016-17")
-tot_2017<-filter(tot_10_19,School_Year=="2017-18")
-tot_2018<-filter(tot_10_19,School_Year=="2018-19")
+total6<-cbind(tot_Afr,tot_His,tot_Wh)
+total6<-total6[,c(-14,-27,-40,-53,-66,-79,-92)]
 
-barplot(tot_2002$Female_Dropouts)
-barplot(tot_2003$Female_Dropouts)
-barplot(tot_2004$Female_Dropouts)
-barplot(tot_2005$Female_Dropouts)
-barplot(tot_2006$Female_Dropouts)
-barplot(tot_2007$Female_Dropouts)
-barplot(tot_2008$Female_Dropouts)
-barplot(tot_2009$Female_Dropouts)
-barplot(tot_2010$Female_Dropouts)
-barplot(tot_2011$Female_Dropouts)
-barplot(tot_2012$Female_Dropouts)
-barplot(tot_2013$Female_Dropouts)
-barplot(tot_2014$Female_Dropouts)
-barplot(tot_2015$Female_Dropouts)
-barplot(tot_2016$Female_Dropouts)
-barplot(tot_2017$Female_Dropouts)
-barplot(tot_2018$Female_Dropouts)
+#Boxplot comparing African-American,Hispanic, and White Dropout Rates from Grades 7-13 by School Year
+boxplot(total6[,c(8,20,32)])
+
+
 
 first_tot<-filter(tot_02_09,Race != "Total")
 second_tot<-filter(tot_10_19,Race != "Total")
 
-ggplot(first_tot, aes(x=School_Year, y=Female_Dropouts,col=Race)) + geom_jitter()
-ggplot(first_tot, aes(x=School_Year, y=Female_Dropouts_Percentage,col=Race)) + geom_jitter()
-
-ggplot(first_tot, aes(x=School_Year, y=Male_Dropouts,col=Race)) + geom_jitter()
-ggplot(first_tot, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Race)) + geom_jitter()
-ggplot(first_tot, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Race,size=Grade_Level)) + geom_jitter()
+ggplot(total5, aes(x=School_Year, y=Female_Dropouts,col=Race)) + geom_jitter()
+ggplot(total5, aes(x=School_Year, y=Female_Dropouts_Percentage,col=Race)) + geom_jitter()
 
 
-
-ggplot(first_tot, aes(x=School_Year, y=Annual_Female_Dropout_Rate,col=Race)) + geom_jitter()
-ggplot(first_tot, aes(x=School_Year, y=Annual_Male_Dropout_Rate,col=Race)) + geom_jitter()
-
-
-
-ggplot(second_tot, aes(x=School_Year, y=Female_Dropouts,col=Race)) + geom_jitter()
-ggplot(second_tot, aes(x=School_Year, y=Female_Dropouts_Percentage,col=Race)) + geom_jitter()
-
-
-ggplot(second_tot, aes(x=School_Year, y=Male_Dropouts,col=Race)) + geom_jitter()
-ggplot(second_tot, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Race)) + geom_jitter()
-
-ggplot(second_tot, aes(x=School_Year, y=Annual_Female_Dropout_Rate,col=Race)) + geom_jitter()
-ggplot(second_tot, aes(x=School_Year, y=Annual_Male_Dropout_Rate,col=Race)) + geom_jitter()
-
-tot_2018<-filter(tot_2018, Race !="Total")
-
-ggplot(tot_2018, aes(x=Grade_Level, y=Male_Dropouts_Percentage,col=Race)) + geom_jitter()
-
+ggplot(total5, aes(x=School_Year, y=Male_Dropouts,col=Race)) + geom_jitter()
+ggplot(total5, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Race)) + geom_jitter()
+ggplot(total5, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Race,size=Grade_Level)) + geom_jitter()
+ggplot(total5,aes(x=Grade_Level,y=Male_Dropouts_Percentage,col=Race))+geom_jitter()
 
 
 ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
+ggplot(tot_His, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
+ggplot(tot_Wh, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
+
 
 ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts_Percentage,label=Grade_Level)) + geom_label()
 ggplot(tot_His, aes(x=School_Year, y=Male_Dropouts_Percentage,label=Grade_Level)) + geom_label()
@@ -374,9 +328,11 @@ ggplot(tot_Wh, aes(x=School_Year, y=Male_Dropouts_Percentage,label=Grade_Level))
 
 
 
-
-
-
+write.csv(total5,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total5.csv", row.names = FALSE)
+write.csv(total6,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total6.csv", row.names = FALSE)
+write.csv(tot_Afr,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_Afr.csv", row.names = FALSE)
+write.csv(tot_His,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_His.csv", row.names = FALSE)
+write.csv(tot_Wh,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_Wh.csv", row.names = FALSE)
 
 
 
