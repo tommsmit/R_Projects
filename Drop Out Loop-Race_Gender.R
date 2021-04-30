@@ -377,14 +377,14 @@ ggplot(total5, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Race,size=Grade
 ggplot(total5,aes(x=Grade_Level,y=Male_Dropouts_Percentage,col=Race))+geom_jitter()
 
 
-ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_col()
+ggplot(tot_Afr, aes(x=Grade_Level, y=Male_Dropouts_Percentage,col=School_Year)) + geom_col()
 ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
 
 ggplot(tot_His, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
 ggplot(tot_Wh, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
 
 
-ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts_Percentage,label=Grade_Level)) + geom_label()
+ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts_Percentage,label=School_Year)) + geom_label()
 ggplot(tot_His, aes(x=School_Year, y=Male_Dropouts_Percentage,label=Grade_Level)) + geom_label()
 ggplot(tot_Wh, aes(x=School_Year, y=Male_Dropouts_Percentage,label=Grade_Level)) + geom_label()
 
@@ -393,6 +393,7 @@ ggplot(tot_Wh, aes(x=School_Year, y=Male_Dropouts_Percentage,label=Grade_Level))
 
 write.csv(total5,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total5.csv", row.names = FALSE)
 write.csv(total6,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total6.csv", row.names = FALSE)
+write.csv(total7,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total7.csv", row.names = FALSE)
 write.csv(tot_Afr,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_Afr.csv", row.names = FALSE)
 write.csv(tot_His,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_His.csv", row.names = FALSE)
 write.csv(tot_Wh,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_Wh.csv", row.names = FALSE)
