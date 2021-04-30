@@ -1130,4 +1130,3 @@ ggplot(total8, aes(x=School_Year, y =Dropouts_Percentage,col=Groups,label=Groups
 write.csv(total_drop_spec,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total_drop_spec.csv", row.names = FALSE)
 write.csv(total7,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total7.csv", row.names = FALSE)
 write.csv(total8,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total8.csv", row.names = FALSE)
-

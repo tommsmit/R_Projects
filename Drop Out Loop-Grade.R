@@ -32,375 +32,375 @@ total_drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numer
 
 #1998-99 through 2013-2014 have different URL than 2014-15 through 2018-19
 
-  
+
 for (j in 1:length(school_year)){
-    if (j==1){
-      a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
-      dropout<-pdf_text(a)
-      p1<-strsplit(dropout, "\r\n")
-      table<-data.frame(p1[[t1[j]]][18:24])
-      rnums<-nrow(table)
-      table$Main<-as.character(table[1:rnums,1])
-      table$Main<-trimws(table$Main, which="left")
-      table$Main<-stripWhitespace(table$Main)
-      table$Main<-gsub("(?:Grade )","Grade-", table$Main)
-      table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
-      table$Main<-gsub("(?:,)","", table$Main)
-      
-      split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
-      drop_grade<-data.frame(Grade=character(),Students=numeric(),Male=numeric(), Male_Percentage=numeric(),Female=numeric(), Female_Percentage=numeric(),State=numeric(),State_Percentage=numeric(),School_Year=numeric())
-      drop_grade<-drop_grade[1:rnums,]
-      drop_grade$Main<-table$Main
-      drop_grade$Grade<-split_var[,1]
-      drop_grade$Male<-split_var[,2]
-      drop_grade$Male_Percentage<-split_var[,3]
-      drop_grade$Female<-split_var[,4]
-      drop_grade$Female_Percentage<-split_var[,5]
-      drop_grade$School_Year<-school_year[j]
-      drop_grade$Female<-as.numeric(drop_grade$Female)
-      drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
-      drop_grade$Male<-as.numeric(drop_grade$Male)
-      drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
-      drop_grade<-select(drop_grade,-Main)
-      drop_grade<-drop_grade[,c(1,2,5,6,3,4,7,8,9)]
-      
-    } else if (j==2){
-      a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
-      dropout<-pdf_text(a)
-      p1<-strsplit(dropout, "\r\n")
-      table<-data.frame(p1[[t1[j]]][18:24])
-      rnums<-nrow(table)
-      table$Main<-as.character(table[1:rnums,1])
-      table$Main<-trimws(table$Main, which="left")
-      table$Main<-stripWhitespace(table$Main)
-      table$Main<-gsub("(?:Grade )","Grade-", table$Main)
-      table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
-      table$Main<-gsub("(?:,)","", table$Main)
-      
-      split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
-      drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
-      drop_grade<-drop_grade[1:rnums,]
-      drop_grade$Main<-table$Main
-      drop_grade$Grade<-split_var[,1]
-      drop_grade$Female<-split_var[,2]
-      drop_grade$Female_Percentage<-split_var[,3]
-      drop_grade$Male<-split_var[,4]
-      drop_grade$Male_Percentage<-split_var[,5]
-      drop_grade$School_Year<-school_year[j]
-      drop_grade$Female<-as.numeric(drop_grade$Female)
-      drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
-      drop_grade$Male<-as.numeric(drop_grade$Male)
-      drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
-      drop_grade<-select(drop_grade,-Main)
-      
-    } else if (j==3|j==4){
-      a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
-      dropout<-pdf_text(a)
-      p1<-strsplit(dropout, "\r\n")
-      table<-data.frame(p1[[t1[j]]][5:11])
-      rnums<-nrow(table)
-      table$Main<-as.character(table[1:rnums,1])
-      table$Main<-trimws(table$Main, which="left")
-      table$Main<-stripWhitespace(table$Main)
-      table$Main<-gsub("(?:Grade )","Grade-", table$Main)
-      table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
-      table$Main<-gsub("(?:,)","", table$Main)
-      
-      split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
-      drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
-      drop_grade<-drop_grade[1:rnums,]
-      drop_grade$Main<-table$Main
-      drop_grade$Grade<-split_var[,1]
-      drop_grade$Female<-split_var[,2]
-      drop_grade$Female_Percentage<-split_var[,3]
-      drop_grade$Male<-split_var[,4]
-      drop_grade$Male_Percentage<-split_var[,5]
-      drop_grade$School_Year<-school_year[j]
-      drop_grade$Female<-as.numeric(drop_grade$Female)
-      drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
-      drop_grade$Male<-as.numeric(drop_grade$Male)
-      drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
-      drop_grade<-select(drop_grade,-Main)
-  
-    } else if (j==5){
-      a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
-      dropout<-pdf_text(a)
-      p1<-strsplit(dropout, "\r\n")
-      table<-data.frame(p1[[t1[j]]][5:10])
-      rnums<-nrow(table)
-      table$Main<-as.character(table[1:rnums,1])
-      table$Main<-trimws(table$Main, which="left")
-      table$Main<-stripWhitespace(table$Main)
-      table$Main<-gsub("(?:Grade )","Grade-", table$Main)
-      table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
-      table$Main<-gsub("(?:,)","", table$Main)
-      
-      split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
-      drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
-      drop_grade<-drop_grade[1:rnums,]
-      drop_grade$Main<-table$Main
-      drop_grade$Grade<-split_var[,1]
-      drop_grade$Female<-split_var[,2]
-      drop_grade$Female_Percentage<-split_var[,3]
-      drop_grade$Male<-split_var[,4]
-      drop_grade$Male_Percentage<-split_var[,5]
-      drop_grade$School_Year<-school_year[j]
-      drop_grade$Female<-as.numeric(drop_grade$Female)
-      drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
-      drop_grade$Male<-as.numeric(drop_grade$Male)
-      drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
-      drop_grade<-select(drop_grade,-Main)
-      drop_grade<-rbind(drop_grade,NA)
-      
-      } else if (j==6){
-      a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
-      dropout<-pdf_text(a)
-      p1<-strsplit(dropout, "\r\n")
-      table<-data.frame(p1[[t1[j]]][5:11])
-      rnums<-nrow(table)
-      table$Main<-as.character(table[1:rnums,1])
-      table$Main<-trimws(table$Main, which="left")
-      table$Main<-stripWhitespace(table$Main)
-      table$Main<-gsub("(?:Grade )","Grade-", table$Main)
-      table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
-      table$Main<-gsub("(?:,)","", table$Main)
-      
-      
-      split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
-      drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
-      drop_grade<-drop_grade[1:rnums,]
-      drop_grade$Main<-table$Main
-      drop_grade$Grade<-split_var[,1]
-      drop_grade$Female<-split_var[,2]
-      drop_grade$Female_Percentage<-split_var[,3]
-      drop_grade$Male<-split_var[,4]
-      drop_grade$Male_Percentage<-split_var[,5]
-      drop_grade$School_Year<-school_year[j]
-      drop_grade$Female<-as.numeric(drop_grade$Female)
-      drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
-      drop_grade$Male<-as.numeric(drop_grade$Male)
-      drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
-      drop_grade<-select(drop_grade,-Main)
-      
-    } else if (j==7){
-      a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
-      dropout<-pdf_text(a)
-      p1<-strsplit(dropout, "\r\n")
-      table<-data.frame(p1[[t1[j]]][5:11])
-      rnums<-nrow(table)
-      table$Main<-as.character(table[1:rnums,1])
-      table$Main<-trimws(table$Main, which="left")
-      table$Main<-stripWhitespace(table$Main)
-      table$Main<-gsub("(?:Grade )","Grade-", table$Main)
-      table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
-      table$Main<-gsub("(?:,)","", table$Main)
-      
-      
-      split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
-      drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
-      drop_grade<-drop_grade[1:rnums,]
-      drop_grade$Main<-table$Main
-      drop_grade$Grade<-split_var[,1]
-      drop_grade$Female<-split_var[,2]
-      drop_grade$Female_Percentage<-split_var[,3]
-      drop_grade$Male<-split_var[,4]
-      drop_grade$Male_Percentage<-split_var[,5]
-      drop_grade$School_Year<-school_year[j]
-      drop_grade$Students<-as.numeric(drop_grade$Students)
-      drop_grade$Female<-as.numeric(drop_grade$Female)
-      drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
-      drop_grade$Male<-as.numeric(drop_grade$Male)
-      drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
-      drop_grade$State<-as.numeric(drop_grade$State)
-      drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
-      drop_grade<-select(drop_grade,-Main)
-      
-      
-    } else if (j==8){
-      a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
-      dropout<-pdf_text(a)
-      p1<-strsplit(dropout, "\r\n")
-      table<-data.frame(p1[[t1[j]]][26:32])
-      rnums<-nrow(table)
-      table$Main<-as.character(table[1:rnums,1])
-      table$Main<-trimws(table$Main, which="left")
-      table$Main<-stripWhitespace(table$Main)
-      table$Main<-gsub("(?:Grade )","Grade-", table$Main)
-      table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
-      table$Main<-gsub("(?:,)","", table$Main)
-      
-      
-      split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
-      drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
-      drop_grade<-drop_grade[1:rnums,]
-      drop_grade$Main<-table$Main
-      drop_grade$Grade<-split_var[,1]
-      drop_grade$Students<-split_var[,2]
-      drop_grade$Female<-split_var[,3]
-      drop_grade$Female_Percentage<-split_var[,4]
-      drop_grade$Male<-split_var[,5]
-      drop_grade$Male_Percentage<-split_var[,6]
-      drop_grade$State<-split_var[,7]
-      drop_grade$State_Percentage<-split_var[,8]
-      drop_grade$School_Year<-school_year[j]
-      drop_grade$Students<-as.numeric(drop_grade$Students)
-      drop_grade$Female<-as.numeric(drop_grade$Female)
-      drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
-      drop_grade$Male<-as.numeric(drop_grade$Male)
-      drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
-      drop_grade$State<-as.numeric(drop_grade$State)
-      drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
-      drop_grade<-select(drop_grade,-Main)
-      
-      
-    } else if (j==9|j==14){
-      a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
-      dropout<-pdf_text(a)
-      p1<-strsplit(dropout, "\r\n")
-      table<-data.frame(p1[[t1[j]]][30:36])
-      rnums<-nrow(table)
-      table$Main<-as.character(table[1:rnums,1])
-      table$Main<-trimws(table$Main, which="left")
-      table$Main<-stripWhitespace(table$Main)
-      table$Main<-gsub("(?:Grade )","Grade-", table$Main)
-      table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
-      table$Main<-gsub("(?:,)","", table$Main)
-      
-      
-      split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
-      drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
-      drop_grade<-drop_grade[1:rnums,]
-      drop_grade$Main<-table$Main
-      drop_grade$Grade<-split_var[,1]
-      drop_grade$Students<-split_var[,2]
-      drop_grade$Female<-split_var[,3]
-      drop_grade$Female_Percentage<-split_var[,4]
-      drop_grade$Male<-split_var[,5]
-      drop_grade$Male_Percentage<-split_var[,6]
-      drop_grade$State<-split_var[,7]
-      drop_grade$State_Percentage<-split_var[,8]
-      drop_grade$School_Year<-school_year[j]
-      drop_grade$Students<-as.numeric(drop_grade$Students)
-      drop_grade$Female<-as.numeric(drop_grade$Female)
-      drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
-      drop_grade$Male<-as.numeric(drop_grade$Male)
-      drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
-      drop_grade$State<-as.numeric(drop_grade$State)
-      drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
-      drop_grade<-select(drop_grade,-Main)
-      
-    } else if (j==10|j==11|j==13|j==15|j==16){
-      a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
-      dropout<-pdf_text(a)
-      p1<-strsplit(dropout, "\r\n")
-      table<-data.frame(p1[[t1[j]]][7:13])
-      rnums<-nrow(table)
-      table$Main<-as.character(table[1:rnums,1])
-      table$Main<-trimws(table$Main, which="left")
-      table$Main<-stripWhitespace(table$Main)
-      table$Main<-gsub("(?:Grade )","Grade-", table$Main)
-      table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
-      table$Main<-gsub("(?:,)","", table$Main)
-      
-      
-      split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
-      drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
-      drop_grade<-drop_grade[1:rnums,]
-      drop_grade$Main<-table$Main
-      drop_grade$Grade<-split_var[,1]
-      drop_grade$Students<-split_var[,2]
-      drop_grade$Female<-split_var[,3]
-      drop_grade$Female_Percentage<-split_var[,4]
-      drop_grade$Male<-split_var[,5]
-      drop_grade$Male_Percentage<-split_var[,6]
-      drop_grade$State<-split_var[,7]
-      drop_grade$State_Percentage<-split_var[,8]
-      drop_grade$School_Year<-school_year[j]
-      drop_grade$Students<-as.numeric(drop_grade$Students)
-      drop_grade$Female<-as.numeric(drop_grade$Female)
-      drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
-      drop_grade$Male<-as.numeric(drop_grade$Male)
-      drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
-      drop_grade$State<-as.numeric(drop_grade$State)
-      drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
-      drop_grade<-select(drop_grade,-Main)
-      
-    } else if (j==12){
-      a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
-      dropout<-pdf_text(a)
-      p1<-strsplit(dropout, "\r\n")
-      table<-data.frame(p1[[t1[j]]][34:40])
-      rnums<-nrow(table)
-      table$Main<-as.character(table[1:rnums,1])
-      table$Main<-trimws(table$Main, which="left")
-      table$Main<-stripWhitespace(table$Main)
-      table$Main<-gsub("(?:Grade )","Grade-", table$Main)
-      table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
-      table$Main<-gsub("(?:,)","", table$Main)
-      
-      
-      split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
-      drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
-      drop_grade<-drop_grade[1:rnums,]
-      drop_grade$Main<-table$Main
-      drop_grade$Grade<-split_var[,1]
-      drop_grade$Students<-split_var[,2]
-      drop_grade$Female<-split_var[,3]
-      drop_grade$Female_Percentage<-split_var[,4]
-      drop_grade$Male<-split_var[,5]
-      drop_grade$Male_Percentage<-split_var[,6]
-      drop_grade$State<-split_var[,7]
-      drop_grade$State_Percentage<-split_var[,8]
-      drop_grade$School_Year<-school_year[j]
-      drop_grade$Students<-as.numeric(drop_grade$Students)
-      drop_grade$Female<-as.numeric(drop_grade$Female)
-      drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
-      drop_grade$Male<-as.numeric(drop_grade$Male)
-      drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
-      drop_grade$State<-as.numeric(drop_grade$State)
-      drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
-      drop_grade<-select(drop_grade,-Main) 
-      
-    } else if (j>=17 & j<=21){
-      b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year[j],".pdf")
-      dropout<-pdf_text(b)
-      p2<-strsplit(dropout, "\r\n")
-      table<-data.frame(p2[[t1[j]]][7:13])
-      rnums<-nrow(table)
-      table$Main<-as.character(table[1:rnums,1])
-      table$Main<-trimws(table$Main, which="left")
-      table$Main<-stripWhitespace(table$Main)
-      table$Main<-gsub("(?:Grade )","Grade-", table$Main)
-      table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
-      table$Main<-gsub("(?:,)","", table$Main)
-      
-      
-      split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
-      drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
-      drop_grade<-drop_grade[1:rnums,]
-      drop_grade$Main<-table$Main
-      drop_grade$Grade<-split_var[,1]
-      drop_grade$Students<-split_var[,2]
-      drop_grade$Female<-split_var[,3]
-      drop_grade$Female_Percentage<-split_var[,4]
-      drop_grade$Male<-split_var[,5]
-      drop_grade$Male_Percentage<-split_var[,6]
-      drop_grade$State<-split_var[,7]
-      drop_grade$State_Percentage<-split_var[,8]
-      drop_grade$School_Year<-school_year[j]
-      drop_grade$Students<-as.numeric(drop_grade$Students)
-      drop_grade$Female<-as.numeric(drop_grade$Female)
-      drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
-      drop_grade$Male<-as.numeric(drop_grade$Male)
-      drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
-      drop_grade$State<-as.numeric(drop_grade$State)
-      drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
-      drop_grade<-select(drop_grade,-Main)
-    }
+  if (j==1){
+    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
+    dropout<-pdf_text(a)
+    p1<-strsplit(dropout, "\r\n")
+    table<-data.frame(p1[[t1[j]]][18:24])
+    rnums<-nrow(table)
+    table$Main<-as.character(table[1:rnums,1])
+    table$Main<-trimws(table$Main, which="left")
+    table$Main<-stripWhitespace(table$Main)
+    table$Main<-gsub("(?:Grade )","Grade-", table$Main)
+    table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
+    table$Main<-gsub("(?:,)","", table$Main)
+    
+    split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
+    drop_grade<-data.frame(Grade=character(),Students=numeric(),Male=numeric(), Male_Percentage=numeric(),Female=numeric(), Female_Percentage=numeric(),State=numeric(),State_Percentage=numeric(),School_Year=numeric())
+    drop_grade<-drop_grade[1:rnums,]
+    drop_grade$Main<-table$Main
+    drop_grade$Grade<-split_var[,1]
+    drop_grade$Male<-split_var[,2]
+    drop_grade$Male_Percentage<-split_var[,3]
+    drop_grade$Female<-split_var[,4]
+    drop_grade$Female_Percentage<-split_var[,5]
+    drop_grade$School_Year<-school_year[j]
+    drop_grade$Female<-as.numeric(drop_grade$Female)
+    drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
+    drop_grade$Male<-as.numeric(drop_grade$Male)
+    drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
+    drop_grade<-select(drop_grade,-Main)
+    drop_grade<-drop_grade[,c(1,2,5,6,3,4,7,8,9)]
+    
+  } else if (j==2){
+    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
+    dropout<-pdf_text(a)
+    p1<-strsplit(dropout, "\r\n")
+    table<-data.frame(p1[[t1[j]]][18:24])
+    rnums<-nrow(table)
+    table$Main<-as.character(table[1:rnums,1])
+    table$Main<-trimws(table$Main, which="left")
+    table$Main<-stripWhitespace(table$Main)
+    table$Main<-gsub("(?:Grade )","Grade-", table$Main)
+    table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
+    table$Main<-gsub("(?:,)","", table$Main)
+    
+    split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
+    drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
+    drop_grade<-drop_grade[1:rnums,]
+    drop_grade$Main<-table$Main
+    drop_grade$Grade<-split_var[,1]
+    drop_grade$Female<-split_var[,2]
+    drop_grade$Female_Percentage<-split_var[,3]
+    drop_grade$Male<-split_var[,4]
+    drop_grade$Male_Percentage<-split_var[,5]
+    drop_grade$School_Year<-school_year[j]
+    drop_grade$Female<-as.numeric(drop_grade$Female)
+    drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
+    drop_grade$Male<-as.numeric(drop_grade$Male)
+    drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
+    drop_grade<-select(drop_grade,-Main)
+    
+  } else if (j==3|j==4){
+    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
+    dropout<-pdf_text(a)
+    p1<-strsplit(dropout, "\r\n")
+    table<-data.frame(p1[[t1[j]]][5:11])
+    rnums<-nrow(table)
+    table$Main<-as.character(table[1:rnums,1])
+    table$Main<-trimws(table$Main, which="left")
+    table$Main<-stripWhitespace(table$Main)
+    table$Main<-gsub("(?:Grade )","Grade-", table$Main)
+    table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
+    table$Main<-gsub("(?:,)","", table$Main)
+    
+    split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
+    drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
+    drop_grade<-drop_grade[1:rnums,]
+    drop_grade$Main<-table$Main
+    drop_grade$Grade<-split_var[,1]
+    drop_grade$Female<-split_var[,2]
+    drop_grade$Female_Percentage<-split_var[,3]
+    drop_grade$Male<-split_var[,4]
+    drop_grade$Male_Percentage<-split_var[,5]
+    drop_grade$School_Year<-school_year[j]
+    drop_grade$Female<-as.numeric(drop_grade$Female)
+    drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
+    drop_grade$Male<-as.numeric(drop_grade$Male)
+    drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
+    drop_grade<-select(drop_grade,-Main)
+    
+  } else if (j==5){
+    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
+    dropout<-pdf_text(a)
+    p1<-strsplit(dropout, "\r\n")
+    table<-data.frame(p1[[t1[j]]][5:10])
+    rnums<-nrow(table)
+    table$Main<-as.character(table[1:rnums,1])
+    table$Main<-trimws(table$Main, which="left")
+    table$Main<-stripWhitespace(table$Main)
+    table$Main<-gsub("(?:Grade )","Grade-", table$Main)
+    table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
+    table$Main<-gsub("(?:,)","", table$Main)
+    
+    split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
+    drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
+    drop_grade<-drop_grade[1:rnums,]
+    drop_grade$Main<-table$Main
+    drop_grade$Grade<-split_var[,1]
+    drop_grade$Female<-split_var[,2]
+    drop_grade$Female_Percentage<-split_var[,3]
+    drop_grade$Male<-split_var[,4]
+    drop_grade$Male_Percentage<-split_var[,5]
+    drop_grade$School_Year<-school_year[j]
+    drop_grade$Female<-as.numeric(drop_grade$Female)
+    drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
+    drop_grade$Male<-as.numeric(drop_grade$Male)
+    drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
+    drop_grade<-select(drop_grade,-Main)
+    drop_grade<-rbind(drop_grade,NA)
+    
+  } else if (j==6){
+    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
+    dropout<-pdf_text(a)
+    p1<-strsplit(dropout, "\r\n")
+    table<-data.frame(p1[[t1[j]]][5:11])
+    rnums<-nrow(table)
+    table$Main<-as.character(table[1:rnums,1])
+    table$Main<-trimws(table$Main, which="left")
+    table$Main<-stripWhitespace(table$Main)
+    table$Main<-gsub("(?:Grade )","Grade-", table$Main)
+    table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
+    table$Main<-gsub("(?:,)","", table$Main)
+    
+    
+    split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
+    drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
+    drop_grade<-drop_grade[1:rnums,]
+    drop_grade$Main<-table$Main
+    drop_grade$Grade<-split_var[,1]
+    drop_grade$Female<-split_var[,2]
+    drop_grade$Female_Percentage<-split_var[,3]
+    drop_grade$Male<-split_var[,4]
+    drop_grade$Male_Percentage<-split_var[,5]
+    drop_grade$School_Year<-school_year[j]
+    drop_grade$Female<-as.numeric(drop_grade$Female)
+    drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
+    drop_grade$Male<-as.numeric(drop_grade$Male)
+    drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
+    drop_grade<-select(drop_grade,-Main)
+    
+  } else if (j==7){
+    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
+    dropout<-pdf_text(a)
+    p1<-strsplit(dropout, "\r\n")
+    table<-data.frame(p1[[t1[j]]][5:11])
+    rnums<-nrow(table)
+    table$Main<-as.character(table[1:rnums,1])
+    table$Main<-trimws(table$Main, which="left")
+    table$Main<-stripWhitespace(table$Main)
+    table$Main<-gsub("(?:Grade )","Grade-", table$Main)
+    table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
+    table$Main<-gsub("(?:,)","", table$Main)
+    
+    
+    split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
+    drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
+    drop_grade<-drop_grade[1:rnums,]
+    drop_grade$Main<-table$Main
+    drop_grade$Grade<-split_var[,1]
+    drop_grade$Female<-split_var[,2]
+    drop_grade$Female_Percentage<-split_var[,3]
+    drop_grade$Male<-split_var[,4]
+    drop_grade$Male_Percentage<-split_var[,5]
+    drop_grade$School_Year<-school_year[j]
+    drop_grade$Students<-as.numeric(drop_grade$Students)
+    drop_grade$Female<-as.numeric(drop_grade$Female)
+    drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
+    drop_grade$Male<-as.numeric(drop_grade$Male)
+    drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
+    drop_grade$State<-as.numeric(drop_grade$State)
+    drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
+    drop_grade<-select(drop_grade,-Main)
+    
+    
+  } else if (j==8){
+    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
+    dropout<-pdf_text(a)
+    p1<-strsplit(dropout, "\r\n")
+    table<-data.frame(p1[[t1[j]]][26:32])
+    rnums<-nrow(table)
+    table$Main<-as.character(table[1:rnums,1])
+    table$Main<-trimws(table$Main, which="left")
+    table$Main<-stripWhitespace(table$Main)
+    table$Main<-gsub("(?:Grade )","Grade-", table$Main)
+    table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
+    table$Main<-gsub("(?:,)","", table$Main)
+    
+    
+    split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
+    drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
+    drop_grade<-drop_grade[1:rnums,]
+    drop_grade$Main<-table$Main
+    drop_grade$Grade<-split_var[,1]
+    drop_grade$Students<-split_var[,2]
+    drop_grade$Female<-split_var[,3]
+    drop_grade$Female_Percentage<-split_var[,4]
+    drop_grade$Male<-split_var[,5]
+    drop_grade$Male_Percentage<-split_var[,6]
+    drop_grade$State<-split_var[,7]
+    drop_grade$State_Percentage<-split_var[,8]
+    drop_grade$School_Year<-school_year[j]
+    drop_grade$Students<-as.numeric(drop_grade$Students)
+    drop_grade$Female<-as.numeric(drop_grade$Female)
+    drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
+    drop_grade$Male<-as.numeric(drop_grade$Male)
+    drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
+    drop_grade$State<-as.numeric(drop_grade$State)
+    drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
+    drop_grade<-select(drop_grade,-Main)
+    
+    
+  } else if (j==9|j==14){
+    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
+    dropout<-pdf_text(a)
+    p1<-strsplit(dropout, "\r\n")
+    table<-data.frame(p1[[t1[j]]][30:36])
+    rnums<-nrow(table)
+    table$Main<-as.character(table[1:rnums,1])
+    table$Main<-trimws(table$Main, which="left")
+    table$Main<-stripWhitespace(table$Main)
+    table$Main<-gsub("(?:Grade )","Grade-", table$Main)
+    table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
+    table$Main<-gsub("(?:,)","", table$Main)
+    
+    
+    split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
+    drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
+    drop_grade<-drop_grade[1:rnums,]
+    drop_grade$Main<-table$Main
+    drop_grade$Grade<-split_var[,1]
+    drop_grade$Students<-split_var[,2]
+    drop_grade$Female<-split_var[,3]
+    drop_grade$Female_Percentage<-split_var[,4]
+    drop_grade$Male<-split_var[,5]
+    drop_grade$Male_Percentage<-split_var[,6]
+    drop_grade$State<-split_var[,7]
+    drop_grade$State_Percentage<-split_var[,8]
+    drop_grade$School_Year<-school_year[j]
+    drop_grade$Students<-as.numeric(drop_grade$Students)
+    drop_grade$Female<-as.numeric(drop_grade$Female)
+    drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
+    drop_grade$Male<-as.numeric(drop_grade$Male)
+    drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
+    drop_grade$State<-as.numeric(drop_grade$State)
+    drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
+    drop_grade<-select(drop_grade,-Main)
+    
+  } else if (j==10|j==11|j==13|j==15|j==16){
+    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
+    dropout<-pdf_text(a)
+    p1<-strsplit(dropout, "\r\n")
+    table<-data.frame(p1[[t1[j]]][7:13])
+    rnums<-nrow(table)
+    table$Main<-as.character(table[1:rnums,1])
+    table$Main<-trimws(table$Main, which="left")
+    table$Main<-stripWhitespace(table$Main)
+    table$Main<-gsub("(?:Grade )","Grade-", table$Main)
+    table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
+    table$Main<-gsub("(?:,)","", table$Main)
+    
+    
+    split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
+    drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
+    drop_grade<-drop_grade[1:rnums,]
+    drop_grade$Main<-table$Main
+    drop_grade$Grade<-split_var[,1]
+    drop_grade$Students<-split_var[,2]
+    drop_grade$Female<-split_var[,3]
+    drop_grade$Female_Percentage<-split_var[,4]
+    drop_grade$Male<-split_var[,5]
+    drop_grade$Male_Percentage<-split_var[,6]
+    drop_grade$State<-split_var[,7]
+    drop_grade$State_Percentage<-split_var[,8]
+    drop_grade$School_Year<-school_year[j]
+    drop_grade$Students<-as.numeric(drop_grade$Students)
+    drop_grade$Female<-as.numeric(drop_grade$Female)
+    drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
+    drop_grade$Male<-as.numeric(drop_grade$Male)
+    drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
+    drop_grade$State<-as.numeric(drop_grade$State)
+    drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
+    drop_grade<-select(drop_grade,-Main)
+    
+  } else if (j==12){
+    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[j],".pdf")
+    dropout<-pdf_text(a)
+    p1<-strsplit(dropout, "\r\n")
+    table<-data.frame(p1[[t1[j]]][34:40])
+    rnums<-nrow(table)
+    table$Main<-as.character(table[1:rnums,1])
+    table$Main<-trimws(table$Main, which="left")
+    table$Main<-stripWhitespace(table$Main)
+    table$Main<-gsub("(?:Grade )","Grade-", table$Main)
+    table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
+    table$Main<-gsub("(?:,)","", table$Main)
+    
+    
+    split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
+    drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
+    drop_grade<-drop_grade[1:rnums,]
+    drop_grade$Main<-table$Main
+    drop_grade$Grade<-split_var[,1]
+    drop_grade$Students<-split_var[,2]
+    drop_grade$Female<-split_var[,3]
+    drop_grade$Female_Percentage<-split_var[,4]
+    drop_grade$Male<-split_var[,5]
+    drop_grade$Male_Percentage<-split_var[,6]
+    drop_grade$State<-split_var[,7]
+    drop_grade$State_Percentage<-split_var[,8]
+    drop_grade$School_Year<-school_year[j]
+    drop_grade$Students<-as.numeric(drop_grade$Students)
+    drop_grade$Female<-as.numeric(drop_grade$Female)
+    drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
+    drop_grade$Male<-as.numeric(drop_grade$Male)
+    drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
+    drop_grade$State<-as.numeric(drop_grade$State)
+    drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
+    drop_grade<-select(drop_grade,-Main) 
+    
+  } else if (j>=17 & j<=21){
+    b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year[j],".pdf")
+    dropout<-pdf_text(b)
+    p2<-strsplit(dropout, "\r\n")
+    table<-data.frame(p2[[t1[j]]][7:13])
+    rnums<-nrow(table)
+    table$Main<-as.character(table[1:rnums,1])
+    table$Main<-trimws(table$Main, which="left")
+    table$Main<-stripWhitespace(table$Main)
+    table$Main<-gsub("(?:Grade )","Grade-", table$Main)
+    table$Main<-gsub("(?:Grades 7-12)","Total", table$Main)
+    table$Main<-gsub("(?:,)","", table$Main)
+    
+    
+    split_var<-as.data.frame(ldply(strsplit(table$Main, split = " ")))
+    drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
+    drop_grade<-drop_grade[1:rnums,]
+    drop_grade$Main<-table$Main
+    drop_grade$Grade<-split_var[,1]
+    drop_grade$Students<-split_var[,2]
+    drop_grade$Female<-split_var[,3]
+    drop_grade$Female_Percentage<-split_var[,4]
+    drop_grade$Male<-split_var[,5]
+    drop_grade$Male_Percentage<-split_var[,6]
+    drop_grade$State<-split_var[,7]
+    drop_grade$State_Percentage<-split_var[,8]
+    drop_grade$School_Year<-school_year[j]
+    drop_grade$Students<-as.numeric(drop_grade$Students)
+    drop_grade$Female<-as.numeric(drop_grade$Female)
+    drop_grade$Female_Percentage<-as.numeric(drop_grade$Female_Percentage)
+    drop_grade$Male<-as.numeric(drop_grade$Male)
+    drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
+    drop_grade$State<-as.numeric(drop_grade$State)
+    drop_grade$State_Percentage<-as.numeric(drop_grade$State_Percentage)
+    drop_grade<-select(drop_grade,-Main)
+  }
   total_drop_grade<-rbind(total_drop_grade,drop_grade)
   print(paste0("Finished Year: ", school_year[j]))
 }
-  
+
 
 total1<-filter(total_drop_grade, Grade !="Total") 
 
@@ -472,11 +472,16 @@ ggplot(total4, aes(x=School_Year, y =Fem_Grade_8)) + geom_col()
 
 
 
-mycolor<-rep(c("red","blue"),6)
+mycolor<-c("red","blue")
 
+#Boxplot Comparing Male/Female Dropout Rate Totals from 1998-2019 (Excluding 2002-03)
+boxplot(total3[,c(3,5)],col=mycolor,main="Female Vs Male Annual Dropout Totals from 1998-2019 (Exluding 2002-03)")
+legend("topleft",legend = c("Female", "Male"),col = mycolor,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
+
+mycolor2<-rep(c("red","blue"),6)
 
 #Boxplot Comparing Male/Female Dropout Rate by Grade-Level
-boxplot(total4[,c(3,5,12,14,20,22,28,30,36,38,44,46)],main="Female Vs Male Dropout by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
+boxplot(total4[,c(3,5,12,14,20,22,28,30,36,38,44,46)],main="Female Vs Male Dropout Rate from 1998-2019 by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
 legend("topleft",legend = c("Female", "Male"),col = mycolor,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 boxplot(total4[,c(4,6,13,15,21,23,29,31,37,39,45,47)],main="Female Vs Male Dropout % by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
@@ -566,25 +571,25 @@ t1<-c(84,95,107,117,119,127,133,61,62,64,69,76,78,77,78,81,81,81,86,86,86)
 
 t1<-c(84,95,107,117,119,127,133)
 t2<-c(61,62,64,69,76,78,77,78,81,81,81,86,86,86)
-  
+
 drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
 total_drop_grade<-data.frame(Grade=character(), Students=numeric(), Female=numeric(), Female_Percentage=numeric(), Male=numeric(), Male_Percentage=numeric(),State=numeric(), State_Percentage=numeric(), School_Year=numeric())
-  
-for (i in 1:length(school_year)){
-    if (i<=16){
-      a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
-      dropout<-pdf_text(a)
-      p1<-strsplit(dropout, "\r\n")
-      
-    } else if (i>16){
-      b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year[i],".pdf")
-      dropout<-pdf_text(b)
-      p2<-strsplit(dropout, "\r\n")
-      
-    } 
 
+for (i in 1:length(school_year)){
+  if (i<=16){
+    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
+    dropout<-pdf_text(a)
+    p1<-strsplit(dropout, "\r\n")
+    
+  } else if (i>16){
+    b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year[i],".pdf")
+    dropout<-pdf_text(b)
+    p2<-strsplit(dropout, "\r\n")
+    
+  } 
+  
   for (k in 1:length(school_year)){
-      if (k==1){
+    if (k==1){
       table<-data.frame(p1[[t1[k]]][q[k]])
       rnums<-nrow(table)
       table$Main<-as.character(table[1:rnums,1])
@@ -610,7 +615,7 @@ for (i in 1:length(school_year)){
       drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
       drop_grade<-select(drop_grade,-Main)
       drop_grade<-drop_grade[,c(1,2,5,6,3,4,7,8,9)]
-  
+      
       
     } else if (k>=2 & k<=4|k==6|k==7){
       table<-data.frame(p1[[t1[k]]][q[k]])
@@ -637,7 +642,7 @@ for (i in 1:length(school_year)){
       drop_grade$Male<-as.numeric(drop_grade$Male)
       drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
       drop_grade<-select(drop_grade,-Main)
-    
+      
     } else if (k==5){
       table<-data.frame(p1[[t1[k]]][q[k]])
       rnums<-nrow(table)
@@ -664,7 +669,7 @@ for (i in 1:length(school_year)){
       drop_grade$Male_Percentage<-as.numeric(drop_grade$Male_Percentage)
       drop_grade<-select(drop_grade,-Main)
       drop_grade<-rbind(drop_grade,NA)
-  
+      
     } else if(k>=8 & k<=16){
       table<-data.frame(p1[[t1[k]]][q[k]])
       rnums<-nrow(table)
