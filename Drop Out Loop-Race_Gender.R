@@ -322,6 +322,7 @@ grd12<-grd12[,c(-3:-6,-15:-18,-27:-30,-25,-37)]
 
 total7<-cbind(grd7,grd8,grd9,grd10,grd11,grd12)
 
+mycolor3<-c("pink","green","blue")
 #Boxplot comparing AA,His, and White Female Dropout Rates by Grade Level
 boxplot(total7[,c(3,11,18,26,34,41,49,57,64,72,80,87,95,103,110,118,126,133)],col=mycolor3,main="Female Dropout Rate by Grade Level from 2002-2019",xlab="Grades 7-12")
 legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
@@ -331,12 +332,12 @@ boxplot(total7[,c(4,12,19,27,35,42,50,58,65,73,81,88,96,104,111,119,127,134)],co
 legend("left",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #Comparing Male Dropout rates
-boxplot(total7[,c(5,13,20,28,36,43,51,59,66,74,82,89,97,105,112,129,128,135)],col=mycolor3,main="Male Dropout Rates by Grade Level from 2002-2019",xlab="Grades 7-12")
+boxplot(total7[,c(5,13,20,28,36,43,51,59,66,74,82,89,97,105,112,120,128,135)],col=mycolor3,main="Male Dropout Rates by Grade Level from 2002-2019",xlab="Grades 7-12")
 legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #Comparing Male Dropout Percentage
 boxplot(total7[,c(6,14,21,29,37,44,52,60,67,75,83,90,98,106,113,121,129,136)],col=mycolor3,main="Male Dropout % by Grade Level from 2002-2019",xlab="Grades 7-12")
-legend("topright",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
+legend("right",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #Comparing Annual Female Dropout Rates
 boxplot(total7[,c(7,15,22,30,38,45,53,61,68,76,84,91,99,107,114,122,130,137)],col=mycolor3,main="Annual Female Dropout Rates by Grade Level from 2002-2019",xlab="Grades 7-12")
@@ -349,7 +350,7 @@ legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor
 mycolor3<-c("Pink","Green","Blue")
 #Boxplot comparing African-American,Hispanic, and White Female % Dropout Rates: Grades 7-12 School Year 2002-2019
 boxplot(total6[,c(8,20,32)],main="Comparing African American, Hispanic, and White Female % Dropout Rates from Grades 7-12 by School Year",col=mycolor3)
-legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
+legend("left",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #Comparing Male % Dropout Rates
 boxplot(total6[,c(10,22,34)],main="Comparing African American, Hispanic, and White Male % Dropout Rates from Grades 7-12 by School Year",col=mycolor3)
