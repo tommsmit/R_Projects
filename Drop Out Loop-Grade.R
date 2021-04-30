@@ -546,6 +546,7 @@ write.csv(grd11,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Proje
 write.csv(grd12,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\grd12.csv", row.names = FALSE)
 
 
+write.csv(total1,"C:\\SAS Files\\total1.csv")
 
 
 

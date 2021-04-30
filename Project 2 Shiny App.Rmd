@@ -168,7 +168,32 @@ ui<-navbarPage("Exploring Dropout Rates By:",
                             plotOutput(outputId="Barplot"),
                             hr(),
                             titlePanel("Male Dropout Rate by Grade Level"),
-                            plotOutput(outputId="Barplot1")
+                            plotOutput(outputId="Barplot1"),
+                             hr(),
+                            br(),
+                            br(),
+                            br(),
+                            
+                            titlePanel("Key Takeaways"),
+                            br(),
+                            titlePanel("Female Vs Male Total Dropouts from 1998-2019 (Excluding 2002-03)"),
+                            plotOutput(outputId="Boxplot"),
+                            p("Comparing the total number of dropouts each year from 1998-2003, overall, males in grades 7-12 had higher dropout totals than females. "),
+                              hr(),
+                            titlePanel("Female Vs Male Dropout Rate from 1998-2019 by Grade Level"),
+                            plotOutput(outputId="Boxplot1"),
+                          
+                            titlePanel("Female Vs Male Dropout % by Grade Level"),
+                            plotOutput(outputId="Boxplot2"),
+                            p("Comparing male vs female dropout rates by grade level, as a whole, we can see that males had higher dropout rates in grades 7-12. Males had the highest number of dropouts in grade 9, but the highest percentage of dropouts occured in grade 12. Females had the highest number and percentage of dropouts in grade 12."),
+                                hr(),
+                            titlePanel("Female Vs. Male Dropouts Grades 7-12 by Year"),
+                            plotOutput(outputId="Boxplot3"),
+                            
+                            titlePanel("Female Vs. Male Dropout % Grades 7-12 by Year"),
+                            plotOutput(outputId="Boxplot4"),
+                            p("Comparing male vs female dropout rates by school year, we can see that,as a whole, males had a higher rate of dropouts each year. The school year 2006-07 had the highest rate and percentage of female and male dropouts, while 2003-04 and 2004-05 had the lowest rate and percentage."),
+                            
 
                         )
 
@@ -243,10 +268,43 @@ server<-function(input, output) {
         ggplot(total4, aes_string(x=input$e, y=input$d)) + geom_col(color=input$f)
     })
     
-     output$Barplot1 <- renderPlot({
+    output$Barplot1 <- renderPlot({
         ggplot(total4, aes_string(x=input$h, y=input$g)) + geom_col(color=input$i)
     })
     
+    output$Boxplot <- renderPlot({
+      mycolor<-c("red","blue")
+
+#Boxplot Comparing Male/Female Dropout Rate Totals from 1998-2019 (Excluding 2002-03)
+boxplot(total3[,c(3,5)],col=mycolor)
+    })
+    
+     output$Boxplot1 <- renderPlot({
+       boxplot(total4[,c(3,5,12,14,20,22,28,30,36,38,44,46)],xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
+legend("topleft",legend = c("Female", "Male"),col = mycolor,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
+    })
+     
+     output$Boxplot2 <- renderPlot({
+       boxplot(total4[,c(4,6,13,15,21,23,29,31,37,39,45,47)],xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
+legend("topleft",legend = c("Female", "Male"),col = mycolor,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
+    })
+     
+     output$Boxplot3 <- renderPlot({
+       mycolor1<-rep(c("Orange","Green"),21)
+
+#Boxplot of Female Vs Male Dropouts from grade 7-12 by Year: 1998-2019
+boxplot(total2[,c(3,5,11,13,19,21,27,29,35,37,43,45,51,53,59,61,67,69,75,77,83,85,91,93,99,101,107,109,115,117,123,125,131,133,139,141,147,149,155,157,163,165)],xlab="School Year: 1998-2019",ylab="Dropout Rate",col=mycolor1)
+legend("topleft",legend = c("Female", "Male"),col = mycolor1,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
+    })
+     
+     output$Boxplot4 <- renderPlot({
+       #Boxplot of Female Vs Male Dropout % from grade 7-12 by Year: 1998-2019
+boxplot(total2[,c(4,6,12,14,20,22,28,30,36,38,44,46,52,54,60,62,68,70,76,78,84,86,92,94,100,102,108,110,116,118,124,126,132,134,140,142,148,150,156,158,164,166)],xlab="School Year: 1998-2019",ylab="Dropout Rate",col=mycolor1)
+
+legend("topleft",legend = c("Female", "Male"),col = mycolor1,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
+       
+     })
+     
     output$Graphic2 <- renderPlot({
         # draw the histogram with the specified number of bins
         ggplot(total5, aes_string(x=input$k, y=input$j,col=input$l)) + geom_jitter() #Notice the difference between the ggplots
