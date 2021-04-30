@@ -254,6 +254,8 @@ tot_Afr9<-filter(tot_Afr,Grade_Level=="9")
 tot_Afr10<-filter(tot_Afr,Grade_Level=="10")
 tot_Afr11<-filter(tot_Afr,Grade_Level=="11")
 tot_Afr12<-filter(tot_Afr,Grade_Level=="12")
+afr_2002<-filter(tot_Afr,School_Year=="2002-03")
+
 
 barplot(tot_Afr$Female_Dropouts)
 barplot(tot_Afr7$Female_Dropouts~school_year)
@@ -294,6 +296,12 @@ barplot(tot_Wh9$Female_Dropouts~school_year)
 barplot(tot_Wh10$Female_Dropouts~school_year)
 barplot(tot_Wh11$Female_Dropouts~school_year)
 barplot(tot_Wh12$Female_Dropouts~school_year)
+
+grade<-c("Grade 07","Grade 08","Grade 09","Grade 10","Grade 11","Grade 12")
+
+afr_2002<-filter(tot_Afr,School_Year=="2002-03")
+barplot(afr_2002$Female~grade)
+
 
 total6<-cbind(tot_Afr,tot_His,tot_Wh)
 total6<-total6[,c(-14,-27,-40,-53,-66,-79,-92)]
@@ -369,7 +377,9 @@ ggplot(total5, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Race,size=Grade
 ggplot(total5,aes(x=Grade_Level,y=Male_Dropouts_Percentage,col=Race))+geom_jitter()
 
 
+ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_col()
 ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
+
 ggplot(tot_His, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
 ggplot(tot_Wh, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
 
