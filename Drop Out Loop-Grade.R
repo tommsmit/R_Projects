@@ -513,7 +513,6 @@ boxplot(total2[,c(3,5,11,13,19,21,27,29,35,37,43,45,51,53,59,61,67,69,75,77,83,8
 legend("topleft",legend = c("Female", "Male"),col = mycolor1,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 
-
 ggplot(total1, aes(x=School_Year, y =Male,col=Grade)) + geom_jitter()
 ggplot(total1, aes(x=School_Year, y =Male_Percentage,col=Grade)) + geom_jitter()
 ggplot(total1, aes(x=School_Year, y =Female,col=Grade)) + geom_jitter()
