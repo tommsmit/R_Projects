@@ -384,7 +384,7 @@ ggplot(tot_His, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) 
 ggplot(tot_Wh, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
 
 
-ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts_Percentage,label=School_Year)) + geom_label()
+ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts_Percentage,label=Grade_Level)) + geom_label()
 ggplot(tot_His, aes(x=School_Year, y=Male_Dropouts_Percentage,label=Grade_Level)) + geom_label()
 ggplot(tot_Wh, aes(x=School_Year, y=Male_Dropouts_Percentage,label=Grade_Level)) + geom_label()
 

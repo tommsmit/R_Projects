@@ -296,23 +296,22 @@ ui<-navbarPage("Exploring Dropout Rates By:",
                             
                             br(),
                             
-                            br(),
                           
-                            br(),
-                          
-                            br(),
-                          
-                          selectInput(inputId = "p", 
+                          selectInput(inputId = "o", 
                                         label = "Y-axis:",
                                         choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"),
                                         selected = "Female_Dropouts"),
                         
                             
-                            selectInput(inputId = "q", 
+                            selectInput(inputId = "p", 
                                         label = "X-axis:",
                                         choices = c("School_Year","Grade_Level"), 
                                         selected = "School_Year"),
-      
+                          
+                          selectInput(inputId = "q", 
+                                        label = "Label:",
+                                        choices = c("School_Year","Grade_Level"), 
+                                        selected = "Grade_Level"),
                            hr(),
                             
                             br(),
@@ -339,16 +338,133 @@ ui<-navbarPage("Exploring Dropout Rates By:",
                             
                             br(),
                           
-                          selectInput(inputId = "s", 
+                            br(),
+                          
+                          
+                          selectInput(inputId = "r", 
                                         label = "Y-axis:",
                                         choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"),
                                         selected = "Female_Dropouts"),
                         
                             
-                            selectInput(inputId = "t", 
+                            selectInput(inputId = "s", 
                                         label = "X-axis:",
                                         choices = c("School_Year","Grade_Level"), 
-                                        selected = "School_Year")
+                                        selected = "School_Year"),
+                           hr(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                        
+                          
+                          selectInput(inputId = "t", 
+                                        label = "Y-axis:",
+                                        choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"),
+                                        selected = "Female_Dropouts"),
+                        
+                            
+                            selectInput(inputId = "u", 
+                                        label = "X-axis:",
+                                        choices = c("School_Year","Grade_Level"), 
+                                        selected = "School_Year"),
+                          
+                          selectInput(inputId = "v", 
+                                        label = "Label:",
+                                        choices = c("School_Year","Grade_Level"), 
+                                        selected = "Grade_Level"),
+      
+                           hr(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                          
+                          selectInput(inputId = "w", 
+                                        label = "Y-axis:",
+                                        choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"),
+                                        selected = "Female_Dropouts"),
+                        
+                            
+                            selectInput(inputId = "x", 
+                                        label = "X-axis:",
+                                        choices = c("School_Year","Grade_Level"), 
+                                        selected = "School_Year"),
+                           hr(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                            
+                            br(),
+                          
+                          
+                          selectInput(inputId = "y", 
+                                        label = "Y-axis:",
+                                        choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"),
+                                        selected = "Female_Dropouts"),
+                        
+                            
+                            selectInput(inputId = "z", 
+                                        label = "X-axis:",
+                                        choices = c("School_Year","Grade_Level"), 
+                                        selected = "School_Year"),
+                          
+                          selectInput(inputId = "a1", 
+                                        label = "Label:",
+                                        choices = c("School_Year","Grade_Level"), 
+                                        selected = "Grade_Level")
                             
                         ),
                         
@@ -359,12 +475,16 @@ ui<-navbarPage("Exploring Dropout Rates By:",
                             hr(),
                             titlePanel("African American Dropout Rates from 2002-2019"),
                             plotOutput(outputId = "Ethnicity_Barplot"),
+                            plotOutput(outputId = "Ethnicity_Labelplot"),
                             hr(),
                             titlePanel("Hispanic Dropout Rates from 2002-2019"),
                             plotOutput(outputId = "Ethnicity_Barplot1"),
+                            plotOutput(outputId = "Ethnicity_Labelplot1"),
                             hr(),
                             titlePanel("White Dropout Rates from 2002-2019"),
                             plotOutput(outputId = "Ethnicity_Barplot2"),
+                            plotOutput(outputId = "Ethnicity_Labelplot2"),
+                            
                         )
                     )
            ),
@@ -374,17 +494,17 @@ ui<-navbarPage("Exploring Dropout Rates By:",
                         #Inputs: Select which inputs from the data we want to display
                         sidebarPanel(
                             #Select variable for y-axis
-                            selectInput(inputId = "v", 
+                            selectInput(inputId = "b1", 
                                         label = "Y-axis:",
                                         choices = c("Students","Students_Percentage","Dropouts","Dropouts_Percentage","Annual_Dropout_Rate","Male_Dropouts_Percentage"), 
                                         selected = "Dropouts"),
                             #Select X-axis variables
-                            selectInput(inputId = "w", 
+                            selectInput(inputId = "c1", 
                                         label = "X-axis:",
                                         choices = c("School_Year","Groups"), 
                                         selected = "School_Year"),
                             #Select Grade Level
-                            selectInput(inputId = "x", 
+                            selectInput(inputId = "d1", 
                                         label = "Color:",
                                         choices = c("Groups","School_Year"),
                                         selected = "Groups")
@@ -454,17 +574,29 @@ legend("topleft",legend = c("Female", "Male"),col = mycolor1,pch = 19,bty = "n",
      output$Ethnicity_Barplot <- renderPlot({
         ggplot(tot_Afr, aes_string(x=input$n, y=input$m)) + geom_col()
     })
+     
+     output$Ethnicity_Labelplot <- renderPlot({
+        ggplot(tot_Afr, aes_string(x=input$p, y=input$o,label=input$q)) + geom_label()
+    })
     
     output$Ethnicity_Barplot1 <- renderPlot({
-        ggplot(tot_His, aes_string(x=input$q, y=input$p)) + geom_col()
+        ggplot(tot_His, aes_string(x=input$s, y=input$r)) + geom_col()
+    })
+    
+    output$Ethnicity_Labelplot1 <- renderPlot({
+        ggplot(tot_Afr, aes_string(x=input$u, y=input$t,label=input$v)) + geom_label()
     })
     
     output$Ethnicity_Barplot2 <- renderPlot({
-        ggplot(tot_Wh, aes_string(x=input$t, y=input$s)) + geom_col()
+        ggplot(tot_Wh, aes_string(x=input$x, y=input$w)) + geom_col()
+    })
+    
+    output$Ethnicity_Labelplot2 <- renderPlot({
+        ggplot(tot_Afr, aes_string(x=input$z, y=input$y,label=input$a1)) + geom_label()
     })
     output$Graphic3 <- renderPlot({
         # draw the histogram with the specified number of bins
-        ggplot(total8, aes_string(x=input$w, y=input$v,col=input$x)) + geom_jitter() 
+        ggplot(total8, aes_string(x=input$c1, y=input$b1,col=input$d1)) + geom_jitter() 
     })
 }
 
