@@ -22,7 +22,12 @@ mycolor3<-c("pink","green","blue")
 
 # Define UI for application that draws a histogram
 
-ui<-navbarPage("Exploring Dropout Rates By:",theme=shinytheme("cerulean"),
+ui<- navbarPage("Exploring Dropout Rates By:",theme=shinytheme("cerulean"),
+                
+               tabPanel(icon("home",
+                  )),
+                             
+               
                tabPanel("Grade Level",
                         
                         sidebarLayout(

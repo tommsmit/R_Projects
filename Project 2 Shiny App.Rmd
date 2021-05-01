@@ -38,6 +38,7 @@ I scraped data from [TEA's Website](https://tea.texas.gov/) from 1998-2019 and a
 library(shiny)
 library(ggplot2)
 library(shinythemes)
+library(bslib)
 
 #Load the Library
 load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total1.RData")
@@ -51,7 +52,7 @@ load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Proj
 
 # Define UI for application that draws a histogram
 
-ui<-navbarPage("Exploring Dropout Rates By:",
+ui<-navbarPage("Exploring Dropout Rates By:",theme=shinytheme("cerulean"),
            tabPanel("Grade Level",
                     
                     sidebarLayout(

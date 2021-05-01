@@ -400,8 +400,7 @@ write.csv(tot_His,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Pro
 write.csv(tot_Wh,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_Wh.csv", row.names = FALSE)
 
 
-
-
+DT::datatable(total5)
 
 
 
