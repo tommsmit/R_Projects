@@ -320,11 +320,11 @@ grd12<-filter(total6,Grade_Level=="12")
 grd12<-grd12[,c(-3:-6,-15:-18,-27:-30,-25,-37)]
 
 
-total7<-cbind(grd7,grd8,grd9,grd10,grd11,grd12)
+total6<-cbind(grd7,grd8,grd9,grd10,grd11,grd12)
 
 mycolor3<-c("pink","green","blue")
 #Boxplot comparing AA,His, and White Female Dropout Rates by Grade Level
-boxplot(total7[,c(3,11,18,26,34,41,49,57,64,72,80,87,95,103,110,118,126,133)],col=mycolor3,main="Female Dropout Rate by Grade Level from 2002-2019",xlab="Grades 7-12")
+boxplot(total6[,c(3,11,18,26,34,41,49,57,64,72,80,87,95,103,110,118,126,133)],col=mycolor3,main="Female Dropout Rate by Grade Level from 2002-2019",xlab="Grades 7-12")
 legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #Comparing Female Percentage
@@ -394,7 +394,6 @@ ggplot(tot_Wh, aes(x=School_Year, y=Male_Dropouts_Percentage,label=Grade_Level))
 
 write.csv(total5,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total5.csv", row.names = FALSE)
 write.csv(total6,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total6.csv", row.names = FALSE)
-write.csv(total7,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total7.csv", row.names = FALSE)
 write.csv(tot_Afr,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_Afr.csv", row.names = FALSE)
 write.csv(tot_His,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_His.csv", row.names = FALSE)
 write.csv(tot_Wh,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_Wh.csv", row.names = FALSE)

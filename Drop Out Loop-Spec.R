@@ -1075,7 +1075,7 @@ label<-c("ESL","CTE","GT","504","Sped","Title I","At Risk","Dyslexia","ELL","Fos
 
 #All Groups compared by Year
 barplot(total7$Dropouts_Percentage.20~label)
-
+barplot(total7$Dropouts_Percentage~label)
 
 
 #1998-2019 by Group
@@ -1092,6 +1092,7 @@ tot_ELL<-filter(total_drop_spec,Groups=="ELL")
 tot_Fost<-filter(total_drop_spec,Groups=="Foster-Care")
 tot_Homeless<-filter(total_drop_spec,Groups=="Homeless")
 tot_Immig<-filter(total_drop_spec,Groups=="Immigrant")
+tot_Immig<-rbind(NA,tot_Immig)
 tot_Mig<-filter(total_drop_spec,Groups=="Migrant")
 tot_Military<-filter(total_drop_spec,Groups=="Military-connected")
 tot_Overage<-filter(total_drop_spec,Groups=="Overage")
@@ -1111,22 +1112,45 @@ barplot(tot_Homeless$Dropouts_Percentage)
 barplot(tot_Immig$Dropouts_Percentage)
 barplot(tot_Mig$Dropouts_Percentage~school_year)
 barplot(tot_Military$Dropouts_Percentage)
-barplot(tot_Overage$Dropouts_Percentage~school_year)
+barplot(tot_Overage$Dropouts~school_year)
 
-total<-cbind(tot_ESL,tot_CTE,tot_GT,tot_504,tot_Spec,tot_TitleI,tot_AtRisk,tot_Dys,tot_ELL,tot_Fost,tot_Homeless,tot_Immig,tot_Mig,tot_Military,tot_Overage)
+total7<-cbind(tot_ESL,tot_GT,tot_Spec,tot_TitleI,tot_AtRisk,tot_ELL,tot_Immig,tot_Mig,tot_Overage)
+total7<-total7[,c(-14,-21,-28,-35,-42,-49,-56,-63)]
+total7<-plyr::rename(total7,c(Dropouts="ESL",Dropouts.1="GT",Dropouts.2="Sped",Dropouts.3="TitleI",Dropouts.4="At Risk",Dropouts.5="ELL",Dropouts.6="Immigrant",Dropouts.7="Migrant",Dropouts.8="Overage"))
+total7<-plyr::rename(total7,c(Dropouts_Percentage="ESL",Dropouts_Percentage.1="GT",Dropouts_Percentage.2="Sped",Dropouts_Percentage.3="TitleI",Dropouts_Percentage.4="At Risk",Dropouts_Percentage.5="ELL",Dropouts_Percentage.6="Immigrant",Dropouts_Percentage.7="Migrant",Dropouts_Percentage.8="Overage"))
+total7<-plyr::rename(total7,c(Annual_Dropout_Rate="ESL",Annual_Dropout_Rate.1="GT",Annual_Dropout_Rate.2="Sped",Annual_Dropout_Rate.3="TitleI",Annual_Dropout_Rate.4="At Risk",Annual_Dropout_Rate.5="ELL",Annual_Dropout_Rate.6="Immigrant",Annual_Dropout_Rate.7="Migrant",Annual_Dropout_Rate.8="Overage"))
+
+
+mycolor4<-c("red","green","blue","orange","purple","pink","yellow","brown","salmon")
+
+#Comparing Dropout Rate of each group from 1998-2019
+boxplot(total7[,c(4,11,17,23,29,35,41,47,53)],main="Dropout Rates by Group from 1998-2019",col=mycolor4)
+
+#Comparing Dropout % of each group from 1998-2019
+boxplot(total7[,c(5,12,18,24,30,36,42,48,54)],main="Dropout % by Group from 1998-2019",col=mycolor4)
+
+#Comparing Annual Dropout Rate of each group from 1998-2019
+boxplot(total7[,c(6,13,19,25,31,37,43,49,55)],main="Annual Dropout Percentage by Group from 1998-2019",col=mycolor4)
+
 
 
 total8<-filter(total_drop_spec,Groups!="Overage")
 
-
-
-ggplot(total_drop_spec, aes(x=School_Year, y =Dropouts_Percentage, label=Groups,col=Groups)) + geom_label()
+ggplot(total_drop_spec, aes(x=Groups, y =Dropouts, label=School_Year,col=Groups)) + geom_label()
 ggplot(total8, aes(x=School_Year, y =Dropouts_Percentage,col=Groups)) + geom_jitter()
 ggplot(total8, aes(x=School_Year, y =Dropouts_Percentage,col=Groups,label=Groups)) + geom_label()
 
-
+ggplot(tot_Spec, aes(x=School_Year, y =Dropouts)) + geom_col()
 
 
 write.csv(total_drop_spec,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total_drop_spec.csv", row.names = FALSE)
 write.csv(total7,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total7.csv", row.names = FALSE)
-write.csv(total8,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total8.csv", row.names = FALSE)
+write.csv(tot_ESL,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_ESL.csv", row.names = FALSE)
+write.csv(tot_GT,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_GT.csv", row.names = FALSE)
+write.csv(tot_Spec,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_Spec.csv", row.names = FALSE)
+write.csv(tot_TitleI,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_TitleI.csv", row.names = FALSE)
+write.csv(tot_AtRisk,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_AtRisk.csv", row.names = FALSE)
+write.csv(tot_ELL,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_ELL.csv", row.names = FALSE)
+write.csv(tot_Immig,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_Immig.csv", row.names = FALSE)
+write.csv(tot_Mig,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_Mig.csv", row.names = FALSE)
+write.csv(tot_Overage,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\tot_Overage.csv", row.names = FALSE)

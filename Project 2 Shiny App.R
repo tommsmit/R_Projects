@@ -2,6 +2,7 @@ library(shiny)
 library(ggplot2)
 library(shinythemes)
 library(bslib)
+library(markdown)
 
 #Load the Library
 load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total1.RData")
@@ -9,11 +10,21 @@ load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Proj
 load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total3.RData")
 load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total4.RData")
 load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total5.RData")
-load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total8.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total6.RData")
 load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total7.RData")
 load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_Afr.RData")
 load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_His.RData")
 load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_Wh.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total_drop_spec.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_ESL.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_GT.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_Spec.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_TitleI.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_AtRisk.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_ELL.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_Immig.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_Mig.RData")
+load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/tot_Overage.RData")
 
 mycolor<-c("red","blue")
 mycolor1<-rep(c("Orange","Green"),21)
@@ -25,7 +36,8 @@ mycolor3<-c("pink","green","blue")
 ui<- navbarPage("Exploring Dropout Rates By:",theme=shinytheme("cerulean"),
                 
                tabPanel(icon("home",
-                  )),
+                 
+               )),
                              
                
                tabPanel("Grade Level",
@@ -502,7 +514,7 @@ ui<- navbarPage("Exploring Dropout Rates By:",theme=shinytheme("cerulean"),
                                 #Select variable for y-axis
                                 selectInput(inputId = "b1", 
                                             label = "Y-axis:",
-                                            choices = c("Students","Students_Percentage","Dropouts","Dropouts_Percentage","Annual_Dropout_Rate","Male_Dropouts_Percentage"), 
+                                            choices = c("Students","Students_Percentage","Dropouts","Dropouts_Percentage","Annual_Dropout_Rate"), 
                                             selected = "Dropouts"),
                                 #Select X-axis variables
                                 selectInput(inputId = "c1", 
@@ -513,18 +525,157 @@ ui<- navbarPage("Exploring Dropout Rates By:",theme=shinytheme("cerulean"),
                                 selectInput(inputId = "d1", 
                                             label = "Color:",
                                             choices = c("Groups","School_Year"),
-                                            selected = "Groups")
+                                            selected = "Groups"),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                hr(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                
+                                selectInput(inputId = "e1", 
+                                            label = "Y-axis:",
+                                            choices = c("Students","Students_Percentage","Dropouts","Dropouts_Percentage","Annual_Dropout_Rate"), 
+                                            selected = "Dropouts"),
+                                #Select X-axis variables
+                                selectInput(inputId = "f1", 
+                                            label = "X-axis:",
+                                            choices = c("School_Year","Groups"), 
+                                            selected = "School_Year"),
+                                #Select Grade Level
+                                selectInput(inputId = "g1", 
+                                            label = "Color:",
+                                            choices = c("Groups"),
+                                            selected = "Groups"),
+                                
+                                selectInput(inputId = "h1",
+                                            label = "Label:",
+                                            choices = c("Groups","School_Year"),
+                                            selected = "Groups"),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                hr(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                hr(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                
+                                #Select Y-axis variables
+                                selectInput(inputId = "i1", 
+                                            label = "Y-axis:",
+                                            choices = c("Students","Students_Percentage","Dropouts","Dropouts_Percentage","Annual_Dropout_Rate"), 
+                                            selected = "Dropouts"),
+                                #Select X-axis variables
+                                selectInput(inputId = "j1", 
+                                            label = "X-axis:",
+                                            choices = c("School_Year"),
+                                            selected = "School_Year"),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                hr(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                hr(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                
+                                #Select Y-axis variables
+                                selectInput(inputId = "k1", 
+                                            label = "Y-axis:",
+                                            choices = c("Students","Students_Percentage","Dropouts","Dropouts_Percentage","Annual_Dropout_Rate"), 
+                                            selected = "Dropouts"),
+                                #Select X-axis variables
+                                selectInput(inputId = "l1", 
+                                            label = "X-axis:",
+                                            choices = c("School_Year"),
+                                            selected = "School_Year"),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                hr(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                hr(),
+                                br(),
+                                br(),
+                                br(),
+                                br(),
+                                
+                                #Select Y-axis variables
+                                selectInput(inputId = "m1", 
+                                            label = "Y-axis:",
+                                            choices = c("Students","Students_Percentage","Dropouts","Dropouts_Percentage","Annual_Dropout_Rate"), 
+                                            selected = "Dropouts"),
+                                #Select X-axis variables
+                                selectInput(inputId = "n1", 
+                                            label = "X-axis:",
+                                            choices = c("School_Year"),
+                                            selected = "School_Year"),
                             ),
                             
                             #Output: Type of plot
                             mainPanel(
+                                titlePanel("Dropouts by Group from 1998-2019"),
                                 plotOutput(outputId = "Graphic3"),
+                                br(),
+                                plotOutput(outputId = "Groups_Labelplot"),
+                                br(),
+                                hr(),
+                                br(),
+                                titlePanel("Dropouts by Overage Students from 1998-2019"),
+                                plotOutput(outputId = "Groups_Barplot"),
+                                br(),
+                                hr(),
+                                br(),
+                                titlePanel("Dropouts by TitleI Students from 1998-2019"),
+                                plotOutput(outputId = "Groups_Barplot1"),
+                                br(),
+                                hr(),
+                                br(),
+                                titlePanel("Dropouts by At Risk Students from 1998-2019"),
+                                plotOutput(outputId = "Groups_Barplot2"),
+                                
                             )
                         )
                )
 )
 
 server<-function(input, output) {
+    
+    output$data <- DT::renderDataTable({
+        DT::datatable(total5)
+    })
     output$Graphic <- renderPlot({
         # draw the histogram with the specified number of bins
         ggplot(total1, aes_string(x=input$b, y=input$a,col=input$c)) + geom_jitter()
@@ -603,43 +754,63 @@ server<-function(input, output) {
     
     output$Ethnicity_Boxplot <- renderPlot({
         mycolor3<-c("pink","green","blue")
-        boxplot(total7[,c(3,11,18,26,34,41,49,57,64,72,80,87,95,103,110,118,126,133)],col=mycolor3,xlab="Grades 7-12")
+        boxplot(total6[,c(3,11,18,26,34,41,49,57,64,72,80,87,95,103,110,118,126,133)],col=mycolor3,xlab="Grades 7-12")
         legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
     })
     
     output$Ethnicity_Boxplot1 <- renderPlot({
         mycolor3<-c("pink","green","blue")
-        boxplot(total7[,c(4,12,19,27,35,42,50,58,65,73,81,88,96,104,111,119,127,134)],col=mycolor3,xlab="Grades 7-12")
+        boxplot(total6[,c(4,12,19,27,35,42,50,58,65,73,81,88,96,104,111,119,127,134)],col=mycolor3,xlab="Grades 7-12")
         legend("left",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
     })
     
     output$Ethnicity_Boxplot2 <- renderPlot({
         mycolor3<-c("pink","green","blue")
-        boxplot(total7[,c(5,13,20,28,36,43,51,59,66,74,82,89,97,105,112,120,128,135)],col=mycolor3,xlab="Grades 7-12")
+        boxplot(total6[,c(5,13,20,28,36,43,51,59,66,74,82,89,97,105,112,120,128,135)],col=mycolor3,xlab="Grades 7-12")
         legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
     })
     
     output$Ethnicity_Boxplot3 <- renderPlot({
         mycolor3<-c("pink","green","blue")
-        boxplot(total7[,c(6,14,21,29,37,44,52,60,67,75,83,90,98,106,113,121,129,136)],col=mycolor3,xlab="Grades 7-12")
+        boxplot(total6[,c(6,14,21,29,37,44,52,60,67,75,83,90,98,106,113,121,129,136)],col=mycolor3,xlab="Grades 7-12")
         legend("right",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
     })
     
     output$Ethnicity_Boxplot4 <- renderPlot({
         mycolor3<-c("pink","green","blue")
-        boxplot(total7[,c(7,15,22,30,38,45,53,61,68,76,84,91,99,107,114,122,130,137)],col=mycolor3,xlab="Grades 7-12")
+        boxplot(total6[,c(7,15,22,30,38,45,53,61,68,76,84,91,99,107,114,122,130,137)],col=mycolor3,xlab="Grades 7-12")
         legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
     })
     
     output$Ethnicity_Boxplot5 <- renderPlot({
         mycolor3<-c("pink","green","blue")
-        boxplot(total7[,c(8,16,23,31,39,46,54,62,69,77,85,92,100,108,115,123,131,138)],col=mycolor3,xlab="Grades 7-12")
+        boxplot(total6[,c(8,16,23,31,39,46,54,62,69,77,85,92,100,108,115,123,131,138)],col=mycolor3,xlab="Grades 7-12")
         legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
     })
     
     output$Graphic3 <- renderPlot({
         # draw the histogram with the specified number of bins
-        ggplot(total8, aes_string(x=input$c1, y=input$b1,col=input$d1)) + geom_jitter() 
+        ggplot(total_drop_spec, aes_string(x=input$c1, y=input$b1,col=input$d1)) + geom_jitter() 
+    })
+    
+    output$Groups_Labelplot <- renderPlot({
+        # draw the histogram with the specified number of bins
+        ggplot(total_drop_spec, aes_string(x=input$f1, y=input$e1,col=input$g1,label=input$h1)) + geom_label() 
+    })
+    
+    output$Groups_Barplot <- renderPlot({
+        # draw the histogram with the specified number of bins
+        ggplot(tot_Overage, aes_string(x=input$j1, y=input$i1)) + geom_col() 
+    })
+    
+    output$Groups_Barplot1 <- renderPlot({
+        # draw the histogram with the specified number of bins
+        ggplot(tot_TitleI, aes_string(x=input$l1, y=input$k1)) + geom_col() 
+    })
+    
+    output$Groups_Barplot2 <- renderPlot({
+        # draw the histogram with the specified number of bins
+        ggplot(tot_AtRisk, aes_string(x=input$n1, y=input$m1)) + geom_col() 
     })
 }
 
