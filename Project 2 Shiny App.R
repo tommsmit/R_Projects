@@ -3,6 +3,7 @@ library(ggplot2)
 library(shinythemes)
 library(bslib)
 library(markdown)
+library(plotly)
 
 #Load the Library
 load("C:/Users/12108/OneDrive/Desktop/UTSA/Spring 2021/R Project/R_Projects/Project 2/total1.RData")
@@ -85,15 +86,16 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 
                                 br(),
                                 
-                                br(),
-                                
-                                br(),
-                                
                                 
                                 selectInput(inputId = "d", 
                                             label = "Y-Axis:",
                                             choices = c("Fem_Grade_7","Fem_Grade_8","Fem_Grade_9","Fem_Grade_10","Fem_Grade_11","Fem_Grade_12"),
                                             selected = "Fem_Grade_7"),
+                                
+                                selectInput(inputId = "a3", 
+                                           label = "Compare Male:",
+                                           choices = c("Male_Grade_7","Male_Grade_8","Male_Grade_9","Male_Grade_10","Male_Grade_11","Male_Grade_12"),
+                                           selected = "Fem_Grade_7"),
                                 
                                 
                                 selectInput(inputId = "e", 
@@ -104,8 +106,8 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 # Select Colors
                                 selectInput(inputId = "f", 
                                             label = "Color",
-                                            choices =  c("red","green","blue","yellow","black"), 
-                                            selected = "black"),
+                                            choices =  c("salmon","green","blue","yellow","black","grey"), 
+                                            selected = "grey"),
                                 
                                 hr(),
                                 
@@ -128,16 +130,16 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 br(),
                                 
                                 br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                
+                      
                                 selectInput(inputId = "g", 
                                             label = "Y-axis:",
                                             choices = c("Male_Grade_7","Male_Grade_8","Male_Grade_9","Male_Grade_10","Male_Grade_11","Male_Grade_12"),
                                             selected = "Male_Grade_7"),
+                                
+                                selectInput(inputId = "b3", 
+                                            label = "Compare Female:",
+                                            choices = c("Fem_Grade_7","Fem_Grade_8","Fem_Grade_9","Fem_Grade_10","Fem_Grade_11","Fem_Grade_12"),
+                                            selected = "Fem_Grade_7"),
                                 
                                 
                                 selectInput(inputId = "h", 
@@ -148,21 +150,21 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 # Select Colors
                                 selectInput(inputId = "i", 
                                             label = "Color",
-                                            choices =  c("red","green","blue","yellow","black"), 
-                                            selected = "black")
+                                            choices =  c("salmon","green","blue","yellow","black","grey"), 
+                                            selected = "grey")
                             ),
                             
                             
                             #Output: Type of plot
                             mainPanel(
                                 titlePanel("Dropout Rates from 1998-2019"),
-                                plotOutput(outputId = "Graphic"),
+                                plotlyOutput(outputId = "Graphic"),
                                 hr(),
                                 titlePanel("Female Dropout Rate by Grade Level"),
-                                plotOutput(outputId="Barplot"),
+                                plotlyOutput(outputId="Barplot"),
                                 hr(),
                                 titlePanel("Male Dropout Rate by Grade Level"),
-                                plotOutput(outputId="Barplot1"),
+                                plotlyOutput(outputId="Barplot1"),
                                 hr(),
                                 br(),
                                 br(),
@@ -301,6 +303,11 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                             label = "Label:",
                                             choices = c("School_Year","Grade_Level"), 
                                             selected = "Grade_Level"),
+                                
+                                selectInput(inputId = "c3", 
+                                            label = "Color:",
+                                            choices = c("Grade_Level"), 
+                                            selected = "Grade_Level"),
                                 hr(),
                                 
                                 br(),
@@ -381,6 +388,11 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                             choices = c("School_Year","Grade_Level"), 
                                             selected = "Grade_Level"),
                                 
+                                selectInput(inputId = "d3", 
+                                            label = "Color:",
+                                            choices = c("Grade_Level"), 
+                                            selected = "Grade_Level"),
+                                
                                 hr(),
                                 
                                 br(),
@@ -453,25 +465,30 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 selectInput(inputId = "a1", 
                                             label = "Label:",
                                             choices = c("School_Year","Grade_Level"), 
-                                            selected = "Grade_Level")
+                                            selected = "Grade_Level"),
+                                
+                                selectInput(inputId = "e3", 
+                                            label = "Color:",
+                                            choices = c("Grade_Level"), 
+                                            selected = "Grade_Level"),
                                 
                             ),
                             
                             #Output: Type of plot
                             mainPanel(
                                 titlePanel("Dropout Rates from 2002-2019 By Race/Ethnicity"),
-                                plotOutput(outputId = "Graphic2"),
+                                plotlyOutput(outputId = "Graphic2"),
                                 hr(),
                                 titlePanel("African American Dropout Rates from 2002-2019"),
-                                plotOutput(outputId = "Ethnicity_Barplot"),
+                                plotlyOutput(outputId = "Ethnicity_Barplot"),
                                 plotOutput(outputId = "Ethnicity_Labelplot"),
                                 hr(),
                                 titlePanel("Hispanic Dropout Rates from 2002-2019"),
-                                plotOutput(outputId = "Ethnicity_Barplot1"),
+                                plotlyOutput(outputId = "Ethnicity_Barplot1"),
                                 plotOutput(outputId = "Ethnicity_Labelplot1"),
                                 hr(),
                                 titlePanel("White Dropout Rates from 2002-2019"),
-                                plotOutput(outputId = "Ethnicity_Barplot2"),
+                                plotlyOutput(outputId = "Ethnicity_Barplot2"),
                                 plotOutput(outputId = "Ethnicity_Labelplot2"),
                                 
                                 hr(),
@@ -699,18 +716,18 @@ server<-function(input, output) {
     output$data <- DT::renderDataTable({
         DT::datatable(total5)
     })
-    output$Graphic <- renderPlot({
+    output$Graphic <- renderPlotly({
         # draw the histogram with the specified number of bins
         ggplot(total1, aes_string(x=input$b, y=input$a,col=input$c)) + geom_jitter()
         #Notice the difference between the ggplots
     })
     
-    output$Barplot <- renderPlot({
-        ggplot(total4, aes_string(x=input$e, y=input$d)) + geom_col(color=input$f)
+    output$Barplot <- renderPlotly({
+        ggplot(total4, aes_string(x=input$e, y=input$d, group=input$a3)) + geom_col(fill=input$f)
     })
     
-    output$Barplot1 <- renderPlot({
-        ggplot(total4, aes_string(x=input$h, y=input$g)) + geom_col(color=input$i)
+    output$Barplot1 <- renderPlotly({
+        ggplot(total4, aes_string(x=input$h, y=input$g, group=input$b3)) + geom_col(fill=input$i)
     })
     
     output$Boxplot <- renderPlot({
@@ -746,33 +763,33 @@ server<-function(input, output) {
         
     })
     
-    output$Graphic2 <- renderPlot({
+    output$Graphic2 <- renderPlotly({
         # draw the histogram with the specified number of bins
         ggplot(total5, aes_string(x=input$k, y=input$j,col=input$l)) + geom_jitter()
     })
     
-    output$Ethnicity_Barplot <- renderPlot({
+    output$Ethnicity_Barplot <- renderPlotly({
         ggplot(tot_Afr, aes_string(x=input$n, y=input$m)) + geom_col()
     })
     
     output$Ethnicity_Labelplot <- renderPlot({
-        ggplot(tot_Afr, aes_string(x=input$p, y=input$o,label=input$q)) + geom_label()
+        ggplot(tot_Afr, aes_string(x=input$p, y=input$o,col=input$c3,label=input$q)) + geom_label()
     })
     
-    output$Ethnicity_Barplot1 <- renderPlot({
+    output$Ethnicity_Barplot1 <- renderPlotly({
         ggplot(tot_His, aes_string(x=input$s, y=input$r)) + geom_col()
     })
     
     output$Ethnicity_Labelplot1 <- renderPlot({
-        ggplot(tot_Afr, aes_string(x=input$u, y=input$t,label=input$v)) + geom_label()
+        ggplot(tot_Afr, aes_string(x=input$u, y=input$t,col=input$d3,label=input$v)) + geom_label()
     })
     
-    output$Ethnicity_Barplot2 <- renderPlot({
+    output$Ethnicity_Barplot2 <- renderPlotly({
         ggplot(tot_Wh, aes_string(x=input$x, y=input$w)) + geom_col()
     })
     
     output$Ethnicity_Labelplot2 <- renderPlot({
-        ggplot(tot_Afr, aes_string(x=input$z, y=input$y,label=input$a1)) + geom_label()
+        ggplot(tot_Afr, aes_string(x=input$z, y=input$y,col=input$e3,label=input$a1)) + geom_label()
     })
     
     output$Ethnicity_Boxplot <- renderPlot({

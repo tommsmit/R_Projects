@@ -377,9 +377,13 @@ ggplot(total5, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Race)) + geom_j
 ggplot(total5, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Race,size=Grade_Level)) + geom_jitter()
 ggplot(total5,aes(x=Grade_Level,y=Male_Dropouts_Percentage,col=Race))+geom_jitter()
 
+tot_Afr2<-tot_Afr[,c(-1)]
 
-ggplot(tot_Afr, aes(x=Grade_Level, y=Male_Dropouts_Percentage,col=School_Year)) + geom_col()
-ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
+################ I need to cbind African Grade 7,8,9,10,11,12 so that ggplotly(barplot) can compare by grade level
+################
+
+ggplotly(ggplot(tot_Afr2, aes(x=School_Year, y=Male_Dropouts)) + geom_col())
+ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts,col=Grade_Level)) + geom_jitter()
 
 ggplot(tot_His, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()
 ggplot(tot_Wh, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()

@@ -12,6 +12,7 @@ library(tictoc)
 library(tidyverse)
 require(XML)
 library(ggplot2)
+library(plotly)
 
 school_year<-c("1998-99","1999-00","2000-01","2001-02","2002-03","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09","2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19")
 school_year2<-c("1998-99","1999-00","2000-01","2001-02","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09","2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19")
@@ -484,7 +485,7 @@ mycolor2<-rep(c("red","blue"),6)
 boxplot(total4[,c(3,5,12,14,20,22,28,30,36,38,44,46)],main="Female Vs Male Dropout Rate from 1998-2019 by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
 legend("topleft",legend = c("Female", "Male"),col = mycolor,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
-boxplot(total4[,c(4,6,13,15,21,23,29,31,37,39,45,47)],main="Female Vs Male Dropout % by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
+plotlyboxplot(total4[,c(4,6,13,15,21,23,29,31,37,39,45,47)],main="Female Vs Male Dropout % by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col=mycolor)
 legend("topleft",legend = c("Female", "Male"),col = mycolor,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #boxplot(total4[,c(3,12,21,30,39,48)],main="Female Dropout by Grade Level",xlab="Grade 7-12",ylab="Dropouts",col="Yellow")
@@ -513,6 +514,12 @@ boxplot(total2[,c(3,5,11,13,19,21,27,29,35,37,43,45,51,53,59,61,67,69,75,77,83,8
 legend("topleft",legend = c("Female", "Male"),col = mycolor1,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 
+plot_ly(x = total1$School_Year, y = total1$Male, col=total1$Grade, mode='points',type='scatter')
+
+ggplotly(ggplot(total1, aes(x=School_Year, y =Male,col=Grade)) + geom_jitter()
+)
+
+
 ggplot(total1, aes(x=School_Year, y =Male,col=Grade)) + geom_jitter()
 ggplot(total1, aes(x=School_Year, y =Male_Percentage,col=Grade)) + geom_jitter()
 ggplot(total1, aes(x=School_Year, y =Female,col=Grade)) + geom_jitter()
@@ -521,7 +528,7 @@ ggplot(total1, aes(x=School_Year, y =Female_Percentage,col=Grade)) + geom_jitter
 ggplot(total1, aes(x=Grade, y =Male,col=School_Year)) + geom_jitter()
 
 
-ggplot(total1, aes(x=Grade, y =Male,label=School_Year)) + geom_label()
+ggplotly(ggplot(total1, aes(x=Grade, y =Male,label=School_Year)) + geom_label())
 
 
 
@@ -530,7 +537,7 @@ ggplot(total3, aes(x=School_Year, y =State,alpha=State_Percentage)) + geom_col()
 ggplot(total3, aes(x=School_Year, y =State,fill=State_Percentage)) + geom_col()
 
 
-
+ggplotly(ggplot(total4, aes(x=School_Year, y =Male_Grade_7,group=Fem_Grade_7)) + geom_col())
 
 
 write.csv(total1,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total1.csv", row.names = FALSE)
