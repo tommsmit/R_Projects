@@ -33,7 +33,7 @@ mycolor3<-c("pink","green","blue")
 
 # Define UI for application that draws a histogram
 
-ui<- navbarPage("Exploring Dropout Rates By:",theme=shinytheme("cerulean"),
+ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                 
                tabPanel(icon("home",
                  
@@ -665,11 +665,34 @@ ui<- navbarPage("Exploring Dropout Rates By:",theme=shinytheme("cerulean"),
                                 br(),
                                 titlePanel("Dropouts by At Risk Students from 1998-2019"),
                                 plotOutput(outputId = "Groups_Barplot2"),
+                                br(),
+                                hr(),
+                                br(),
+                                titlePanel("Key Takeaways"),
+                                br(),
+                                br(),
+                                titlePanel("Dropout Rates by Group from 1998-2019"),
+                                plotOutput(outputId = "Groups_Boxplot"),
+                                p("Overall Title I, At Risk, and Overage students were the three groups with the most dropouts from 1998-2019 by far. GT Students had by far the least number of dropouts. ELL student dropouts were higher than ESL student dropouts every year from 1998-2019 (refer to home page for definitions). During the 2004-05 and 2005-06 school year, there a dramatic increase in dropout rates consistently across every group."),
+                                br(),
+                                hr(),
+                                br(),
+                                titlePanel("Dropout Percentage by Group from 1998-2019"),
+                                plotOutput(outputId = "Groups_Boxplot1"),
+                                p("Again, Title I, At Risk, and Overage students had by far the highest dropout percentage from 1998-2019, while GT students had the lowest. ESL, GT, Title I, At Risk, ELL, and Immigrant students saw an overall increasing trend of dropout percentage from 1998-2019. Special Education and Migrant students saw an overall decreasing trend of dropout percentage, while Overage students saw a overall constant trend."),
+                                br(),
+                                hr(),
+                                br(),
+                                titlePanel("Annual Dropout Percentage by Group from 1998-2019"),
+                                plotOutput(outputId = "Groups_Boxplot2"),
+                                p("Overall, GT and Overage students had the lowest and highest annual dropout percentages from 1998-2019 respectfully. The rest of the groups in the boxplot below have very similar data and can be grouped together. During the years 2015-16, 2016-17, and 2018-19, homeless students had the highest annual dropout percentage of all the groups, while foster care students had the third highest."),
+                              
+                                )
                                 
                             )
                         )
                )
-)
+
 
 server<-function(input, output) {
     
@@ -812,6 +835,31 @@ server<-function(input, output) {
         # draw the histogram with the specified number of bins
         ggplot(tot_AtRisk, aes_string(x=input$n1, y=input$m1)) + geom_col() 
     })
+    
+    output$Groups_Boxplot <- renderPlot({
+        # draw the histogram with the specified number of bins
+        mycolor4<-c("red","green","blue","orange","purple","pink","yellow","brown","salmon")
+        #Comparing Dropout Rate of each group from 1998-2019
+        boxplot(total7[,c(4,11,17,23,29,35,41,47,53)],col=mycolor4)
+    })
+    
+    output$Groups_Boxplot1 <- renderPlot({
+        # draw the histogram with the specified number of bins
+        mycolor4<-c("red","green","blue","orange","purple","pink","yellow","brown","salmon")
+        #Comparing Dropout Rate of each group from 1998-2019
+        boxplot(total7[,c(5,12,18,24,30,36,42,48,54)],col=mycolor4)
+    })
+    
+    output$Groups_Boxplot2 <- renderPlot({
+        # draw the histogram with the specified number of bins
+        mycolor4<-c("red","green","blue","orange","purple","pink","yellow","brown","salmon")
+        #Comparing Dropout Rate of each group from 1998-2019
+        boxplot(total7[,c(6,13,19,25,31,37,43,49,55)],col=mycolor4)
+    })
+    
+    
+    
+    
 }
 
 

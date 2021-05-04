@@ -1122,7 +1122,6 @@ total7<-plyr::rename(total7,c(Annual_Dropout_Rate="ESL",Annual_Dropout_Rate.1="G
 
 
 mycolor4<-c("red","green","blue","orange","purple","pink","yellow","brown","salmon")
-
 #Comparing Dropout Rate of each group from 1998-2019
 boxplot(total7[,c(4,11,17,23,29,35,41,47,53)],main="Dropout Rates by Group from 1998-2019",col=mycolor4)
 
@@ -1136,11 +1135,11 @@ boxplot(total7[,c(6,13,19,25,31,37,43,49,55)],main="Annual Dropout Percentage by
 
 total8<-filter(total_drop_spec,Groups!="Overage")
 
-ggplot(total_drop_spec, aes(x=Groups, y =Dropouts, label=School_Year,col=Groups)) + geom_label()
+ggplot(total_drop_spec, aes(x=School_Year, y =Annual_Dropout_Rate, label=Groups,col=Groups)) + geom_label()
 ggplot(total8, aes(x=School_Year, y =Dropouts_Percentage,col=Groups)) + geom_jitter()
 ggplot(total8, aes(x=School_Year, y =Dropouts_Percentage,col=Groups,label=Groups)) + geom_label()
 
-ggplot(tot_Spec, aes(x=School_Year, y =Dropouts)) + geom_col()
+ggplot(tot_Overage, aes(x=School_Year, y =Annual_Dropout_Rate)) + geom_col()
 
 
 write.csv(total_drop_spec,"C:\\Users\\12108\\OneDrive\\Desktop\\UTSA\\Spring 2021\\R Project\\R_Projects\\Project 2\\total_drop_spec.csv", row.names = FALSE)
