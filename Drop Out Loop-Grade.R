@@ -405,6 +405,7 @@ for (j in 1:length(school_year)){
 
 total1<-filter(total_drop_grade, Grade !="Total") 
 
+DT::datatable(total1)
 
 
 x1<-filter(total1, School_Year=="1998-99")

@@ -39,7 +39,11 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                 
                tabPanel(icon("home"),
                         mainPanel(
-                        h1("Project Overview"),
+                        h1("Project 2: Dropout Rates in Texas Public Schools from 1998-2019 in Grades 7-12",align="left"),
+                        tags$img(src="Dropout.jpg",align="right",height=200,width=300),
+                        br(),
+                        br(),
+                        h2("Project Overview"),
                         br(),
                         br(),
                         p("For my second project, I wanted to explore dropout rates in Texas public schools. As a former high school math teacher, I worked with countless students, each with their own background, heritage and labels. A lot of those students struggled in high school, but luckily very few of them dropped out. According to Texas Education Agency (TEA), there are a multitude of reasons for dropping out of high school. Here are some common reasons:"),
@@ -58,7 +62,7 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                         
                         p("- Incarceration"),
                         
-                        p("- Being homeless"),
+                        p("- Homelessness"),
                         
                         p("- Deceased "),
                         br(),
@@ -68,10 +72,11 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                         tags$p("Student characteristics include: Special Education, 504, Gifted and Talented (GT), At Risk, English Language Learner (ELL), dyslexic, ect.",tags$a(href="https://rptsvr1.tea.texas.gov/acctres/gloss1112.html","Click Here"),"for a full list of descriptions."),
                         br(),
                         tags$p("I scraped data from",tags$a(href="https://tea.texas.gov/reports-and-data/school-performance/accountability-research/completion-graduation-and-dropouts","TEA's Website"),"from 1998-2019 and analyzed the data. Here are my results."),
-                        
-                        )
+
+)
+                        ),
                  
-               ),
+               
                              
                
                tabPanel("Grade Level",
@@ -718,15 +723,24 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 
                             )
                         )
-               )
+
+                          
+                             
+                             
+           
+)
 
 
 server<-function(input, output) {
     
-    output$Homepage<-renderPrint({
-        
+    output$table1 <- DT::renderDataTable({
+        DT::datatable(total1)
     })
-
+    
+    output$table2 <- DT::renderDataTable({
+        DT::datatable(total5)
+    })
+    
     output$Graphic <- renderPlotly({
         # draw the histogram with the specified number of bins
         ggplot(total1, aes_string(x=input$b, y=input$a,col=input$c)) + geom_jitter()
