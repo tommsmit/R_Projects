@@ -14,6 +14,7 @@ library(tictoc)
 library(tidyverse)
 require(XML)
 library(ggplot2)
+library(plotly)
 
 school_year1<-c("2002-03","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09")
 school_year2<-c("2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19")
@@ -328,23 +329,23 @@ boxplot(total6[,c(3,11,18,26,34,41,49,57,64,72,80,87,95,103,110,118,126,133)],co
 legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #Comparing Female Percentage
-boxplot(total7[,c(4,12,19,27,35,42,50,58,65,73,81,88,96,104,111,119,127,134)],col=mycolor3,main="Female Dropout % by Grade Level from 2002-2019",xlab="Grades 7-12")
+boxplot(total6[,c(4,12,19,27,35,42,50,58,65,73,81,88,96,104,111,119,127,134)],col=mycolor3,main="Female Dropout % by Grade Level from 2002-2019",xlab="Grades 7-12")
 legend("left",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #Comparing Male Dropout rates
-boxplot(total7[,c(5,13,20,28,36,43,51,59,66,74,82,89,97,105,112,120,128,135)],col=mycolor3,main="Male Dropout Rates by Grade Level from 2002-2019",xlab="Grades 7-12")
+boxplot(total6[,c(5,13,20,28,36,43,51,59,66,74,82,89,97,105,112,120,128,135)],col=mycolor3,main="Male Dropout Rates by Grade Level from 2002-2019",xlab="Grades 7-12")
 legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #Comparing Male Dropout Percentage
-boxplot(total7[,c(6,14,21,29,37,44,52,60,67,75,83,90,98,106,113,121,129,136)],col=mycolor3,main="Male Dropout % by Grade Level from 2002-2019",xlab="Grades 7-12")
+boxplot(total6[,c(6,14,21,29,37,44,52,60,67,75,83,90,98,106,113,121,129,136)],col=mycolor3,main="Male Dropout % by Grade Level from 2002-2019",xlab="Grades 7-12")
 legend("right",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #Comparing Annual Female Dropout Rates
-boxplot(total7[,c(7,15,22,30,38,45,53,61,68,76,84,91,99,107,114,122,130,137)],col=mycolor3,main="Annual Female Dropout Rates by Grade Level from 2002-2019",xlab="Grades 7-12")
+boxplot(total6[,c(7,15,22,30,38,45,53,61,68,76,84,91,99,107,114,122,130,137)],col=mycolor3,main="Annual Female Dropout Rates by Grade Level from 2002-2019",xlab="Grades 7-12")
 legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 #Comparing Annual Male Dropout Rates
-boxplot(total7[,c(8,16,23,31,39,46,54,62,69,77,85,92,100,108,115,123,131,138)],col=mycolor3,main="Annual Male Dropout Rates by Grade Level from 2002-2019",xlab="Grades 7-12")
+boxplot(total6[,c(8,16,23,31,39,46,54,62,69,77,85,92,100,108,115,123,131,138)],col=mycolor3,main="Annual Male Dropout Rates by Grade Level from 2002-2019",xlab="Grades 7-12")
 legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
 
 mycolor3<-c("Pink","Green","Blue")
@@ -382,7 +383,7 @@ tot_Afr2<-tot_Afr[,c(-1)]
 ################ I need to cbind African Grade 7,8,9,10,11,12 so that ggplotly(barplot) can compare by grade level
 ################
 
-ggplotly(ggplot(tot_Afr2, aes(x=School_Year, y=Male_Dropouts)) + geom_col())
+ggplotly(ggplot(tot_Afr, aes(x=School_Year, y=Female_Dropouts,fill=Grade_Level)) + geom_col())
 ggplot(tot_Afr, aes(x=School_Year, y=Male_Dropouts,col=Grade_Level)) + geom_jitter()
 
 ggplot(tot_His, aes(x=School_Year, y=Male_Dropouts_Percentage,col=Grade_Level)) + geom_jitter()

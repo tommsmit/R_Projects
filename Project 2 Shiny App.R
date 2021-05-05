@@ -248,10 +248,6 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 
                                 br(),
                                 
-                                br(),
-                                
-                                br(),
-                                
                                 selectInput(inputId = "m", 
                                             label = "Y-axis:",
                                             choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"),
@@ -262,6 +258,11 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                             label = "X-axis:",
                                             choices = c("School_Year","Grade_Level"), 
                                             selected = "School_Year"),
+                                
+                                selectInput(inputId = "f3", 
+                                            label = "Color:",
+                                            choices = c("School_Year","Grade_Level"), 
+                                            selected = "Grade_Level"),
                                 
                                 hr(),
                                 
@@ -276,18 +277,7 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 br(),
                                 
                                 br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                
+                               
                                 selectInput(inputId = "o", 
                                             label = "Y-axis:",
                                             choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"),
@@ -324,19 +314,7 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 
                                 br(),
                                 
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                
+                              
                                 selectInput(inputId = "r", 
                                             label = "Y-axis:",
                                             choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"),
@@ -347,6 +325,11 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                             label = "X-axis:",
                                             choices = c("School_Year","Grade_Level"), 
                                             selected = "School_Year"),
+                                
+                                selectInput(inputId = "g3", 
+                                            label = "Color:",
+                                            choices = c("School_Year","Grade_Level"), 
+                                            selected = "Grade_Level"),
                                 hr(),
                                 
                                 br(),
@@ -360,17 +343,6 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 br(),
                                 
                                 br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
                                 
                                 selectInput(inputId = "t", 
                                             label = "Y-axis:",
@@ -411,13 +383,7 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 
                                 br(),
                                 
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                
+                               
                                 selectInput(inputId = "w", 
                                             label = "Y-axis:",
                                             choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"),
@@ -428,6 +394,11 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                             label = "X-axis:",
                                             choices = c("School_Year","Grade_Level"), 
                                             selected = "School_Year"),
+                                
+                                selectInput(inputId = "h3", 
+                                            label = "Color:",
+                                            choices = c("School_Year","Grade_Level"), 
+                                            selected = "Grade_Level"),
                                 hr(),
                                 
                                 br(),
@@ -442,15 +413,7 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 
                                 br(),
                                 
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                br(),
-                                
-                                
+                               
                                 selectInput(inputId = "y", 
                                             label = "Y-axis:",
                                             choices = c("Female_Dropouts","Female_Dropouts_Percentage","Male_Dropouts","Male_Dropouts_Percentage","Annual_Female_Dropout_Rate","Annual_Male_Dropout_Rate"),
@@ -498,18 +461,18 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 br(),
                                 titlePanel("Female Dropout Rate by Grade Level from 2002-2019"),
                                 plotOutput(outputId = "Ethnicity_Boxplot"),
+                                p("Comparing dropout rates of African American, Hispanic, and White females, we can see that Hispanic females had the highest dropout rate in each grade level. African American females had the second highest dropout rate followed by White females. Grade 12 had the highest dropout rates for African American, Hispanic, and White females."),
                                 titlePanel("Female Dropout % by Grade Level from 2002-2019"),
                                 plotOutput(outputId = "Ethnicity_Boxplot1"),
-                                
-                                p("Comparing dropout rates and percentages of African American, Hispanic, and White females, we can see that Hispanic females had the highest dropout rates each grade level. Hispanic Females by far had the highest dropout percentage for each grade level. African American females had the second highest rate and percentage of dropouts followed by White females."),
+                                p("Comparing dropout percentages of African American, Hispanic, and White females, Hispanic Females by far had the highest dropout percentage for each grade level. Again, African American females had the second highest percentage of dropouts followed by White females. African American females had the highest dropout percentage in grade 7, Hispanic females in grade 9, and While females in grade 11."),
                                 hr(),
                                 br(),
                                 titlePanel("Male Dropout Rate by Grade Level from 2002-2019"),
                                 plotOutput(outputId = "Ethnicity_Boxplot2"),
+                                p("Comparing dropout rates of African American, Hispanic, and White males, we can see that Hispanic males also had the highest dropout rate in each grade level, while African American males had the second highest dropout rate followed by White males. Grade 9 had the highest dropout rates for Hispanic and African American males, while grade 11 for White males."),
                                 titlePanel("Male Dropout % by Grade Level from 2002-2019"),
                                 plotOutput(outputId = "Ethnicity_Boxplot3"),
-                                
-                                p("As you can see, we have the same results when comparing African American, Hispanic, and White males."),
+                                p("Similar to dropout percentages of females, Hispanic males also had the highest dropout percentage by far in each grade level, while African American males had the second highest dropout percentage followed by White males. Grade 9 had the highest dropout percentage for Hispanic males, grade 7 for African American males, and grade 11 for White males."),
                                 hr(),
                                 br(),
                                 
@@ -517,7 +480,6 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 plotOutput(outputId = "Ethnicity_Boxplot4"),
                                 titlePanel("Annual Male Dropout % by Grade Level from 2002-2019"),
                                 plotOutput(outputId = "Ethnicity_Boxplot5"),
-                                
                                 p("Comparing annual dropout rates of African American, Hispanic, and White males and females, we can see that African American females and males had the highest annual dropout rate in each grade level. Hispanic females and males had the second highest annual dropout rate, while White males and females had the lowest dropout rates, especially in high school (grades 9-12)."),
                                 
                             )
@@ -769,7 +731,7 @@ server<-function(input, output) {
     })
     
     output$Ethnicity_Barplot <- renderPlotly({
-        ggplot(tot_Afr, aes_string(x=input$n, y=input$m)) + geom_col()
+        ggplot(tot_Afr, aes_string(x=input$n, y=input$m,fill=input$f3)) + geom_col()
     })
     
     output$Ethnicity_Labelplot <- renderPlot({
@@ -777,7 +739,7 @@ server<-function(input, output) {
     })
     
     output$Ethnicity_Barplot1 <- renderPlotly({
-        ggplot(tot_His, aes_string(x=input$s, y=input$r)) + geom_col()
+        ggplot(tot_His, aes_string(x=input$s, y=input$r,fill=input$g3)) + geom_col()
     })
     
     output$Ethnicity_Labelplot1 <- renderPlot({
@@ -785,7 +747,7 @@ server<-function(input, output) {
     })
     
     output$Ethnicity_Barplot2 <- renderPlotly({
-        ggplot(tot_Wh, aes_string(x=input$x, y=input$w)) + geom_col()
+        ggplot(tot_Wh, aes_string(x=input$x, y=input$w,fill=input$h3)) + geom_col()
     })
     
     output$Ethnicity_Labelplot2 <- renderPlot({
