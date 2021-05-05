@@ -188,7 +188,7 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 
                                 titlePanel("Female Vs. Male Dropout % Grades 7-12 by Year"),
                                 plotOutput(outputId="Boxplot4"),
-                                p("Comparing male vs female dropout rates by school year, we can see that,as a whole, males had a higher rate of dropouts each year. The school year 2006-07 had the highest rate and percentage of female and male dropouts, while 2003-04 and 2004-05 had the lowest rate and percentage."),
+                                p("Comparing male vs female dropout rates by school year, we can see that,as a whole, males had higher rates of dropouts each year. The highest recorded rate and percentage of female and male dropouts occured during the 2006-07 school year, while the lowest rate and percentage was recoreded in 2003-04 and 2004-05."),
                                 
                                 
                             )
@@ -220,7 +220,7 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 #Select Grade Level
                                 selectInput(inputId = "l", 
                                             label = "Color:",
-                                            choices = c("Race","Grade_Level"),
+                                            choices = c("Race"),
                                             selected = "Race"),
                                 hr(),
                                 
@@ -461,18 +461,18 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 br(),
                                 titlePanel("Female Dropout Rate by Grade Level from 2002-2019"),
                                 plotOutput(outputId = "Ethnicity_Boxplot"),
-                                p("Comparing dropout rates of African American, Hispanic, and White females, we can see that Hispanic females had the highest dropout rate in each grade level. African American females had the second highest dropout rate followed by White females. Grade 12 had the highest dropout rates for African American, Hispanic, and White females."),
+                                p("Comparing dropout rates of African American, Hispanic, and White females, we can see that,overall,Hispanic females had the highest dropout rates in each grade level. African American females had the second highest dropout rates followed by White females. As a whole, Grade 12 had the highest dropout rates for African American, Hispanic, and White females. In particular, the year 2006-07 recorded the highest number of dropouts for all three groups occurring in grade 12."),
                                 titlePanel("Female Dropout % by Grade Level from 2002-2019"),
                                 plotOutput(outputId = "Ethnicity_Boxplot1"),
-                                p("Comparing dropout percentages of African American, Hispanic, and White females, Hispanic Females by far had the highest dropout percentage for each grade level. Again, African American females had the second highest percentage of dropouts followed by White females. African American females had the highest dropout percentage in grade 7, Hispanic females in grade 9, and While females in grade 11."),
+                                p("Comparing dropout percentages of African American, Hispanic, and White females, overall, Hispanic Females by far had the highest dropout percentages for each grade level. Again, African American females had the second highest percentages of dropouts followed by White females. As a whole, African American females had the highest dropout percentages in grade 7, Hispanic females in grade 9, and White females in grade 11. African American females had the highest recorded percentage during the 2005-06 school year occurring in grade 7, Hispanic females in 2003-04 in grade 8, and White females in 2002-03 in grade 12."),
                                 hr(),
                                 br(),
                                 titlePanel("Male Dropout Rate by Grade Level from 2002-2019"),
                                 plotOutput(outputId = "Ethnicity_Boxplot2"),
-                                p("Comparing dropout rates of African American, Hispanic, and White males, we can see that Hispanic males also had the highest dropout rate in each grade level, while African American males had the second highest dropout rate followed by White males. Grade 9 had the highest dropout rates for Hispanic and African American males, while grade 11 for White males."),
+                                p("Comparing dropout rates of African American, Hispanic, and White males, we can see that Hispanic males also had the highest dropout rates in each grade level, while African American males had the second highest dropout rates followed by White males. Overall, Grade 9 had the highest dropout rates for Hispanic and African American males, while grade 11 for White males. The highest recorded dropout rate for African American males occurred during 2006-07 school year in grade 12, Hispanic males in 2006-07 in grade 9, and White males in 2006-07 in grade 12."),
                                 titlePanel("Male Dropout % by Grade Level from 2002-2019"),
                                 plotOutput(outputId = "Ethnicity_Boxplot3"),
-                                p("Similar to dropout percentages of females, Hispanic males also had the highest dropout percentage by far in each grade level, while African American males had the second highest dropout percentage followed by White males. Grade 9 had the highest dropout percentage for Hispanic males, grade 7 for African American males, and grade 11 for White males."),
+                                p("Similar to dropout percentages of females, Hispanic males also had the highest dropout percentage by far in each grade level, while African American males had the second highest dropout percentage followed by White males. Overall, Grade 9 had the highest dropout percentages for Hispanic males, grade 7 for African American males, and grade 11 for White males. African American males recorded the highest dropout percentage during the 2005-06 school year in grade 7, Hispanic males in 2013-14 in grade 8, and White males in 2002-03 in grade 12."),
                                 hr(),
                                 br(),
                                 
@@ -626,24 +626,24 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                             #Output: Type of plot
                             mainPanel(
                                 titlePanel("Dropouts by Group from 1998-2019"),
-                                plotOutput(outputId = "Graphic3"),
+                                plotlyOutput(outputId = "Graphic3"),
                                 br(),
                                 plotOutput(outputId = "Groups_Labelplot"),
                                 br(),
                                 hr(),
                                 br(),
                                 titlePanel("Dropouts by Overage Students from 1998-2019"),
-                                plotOutput(outputId = "Groups_Barplot"),
+                                plotlyOutput(outputId = "Groups_Barplot"),
                                 br(),
                                 hr(),
                                 br(),
                                 titlePanel("Dropouts by TitleI Students from 1998-2019"),
-                                plotOutput(outputId = "Groups_Barplot1"),
+                                plotlyOutput(outputId = "Groups_Barplot1"),
                                 br(),
                                 hr(),
                                 br(),
                                 titlePanel("Dropouts by At Risk Students from 1998-2019"),
-                                plotOutput(outputId = "Groups_Barplot2"),
+                                plotlyOutput(outputId = "Groups_Barplot2"),
                                 br(),
                                 hr(),
                                 br(),
@@ -652,19 +652,19 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                                 br(),
                                 titlePanel("Dropout Rates by Group from 1998-2019"),
                                 plotOutput(outputId = "Groups_Boxplot"),
-                                p("Overall Title I, At Risk, and Overage students were the three groups with the most dropouts from 1998-2019 by far. GT Students had by far the least number of dropouts. ELL student dropouts were higher than ESL student dropouts every year from 1998-2019 (refer to home page for definitions). During the 2004-05 and 2005-06 school year, there a dramatic increase in dropout rates consistently across every group."),
+                                p("Overall, Title I, At Risk, and Overage students had significantly the highest dropout rates from 1998-2019, while GT Students had the least number of dropouts. ELL student dropouts were higher than ESL student dropouts every year from 1998-2019 (refer to home page for definitions). During the 2005-06 school year, there a dramatic increase in dropout rates consistently across every group."),
                                 br(),
                                 hr(),
                                 br(),
                                 titlePanel("Dropout Percentage by Group from 1998-2019"),
                                 plotOutput(outputId = "Groups_Boxplot1"),
-                                p("Again, Title I, At Risk, and Overage students had by far the highest dropout percentage from 1998-2019, while GT students had the lowest. ESL, GT, Title I, At Risk, ELL, and Immigrant students saw an overall increasing trend of dropout percentage from 1998-2019. Special Education and Migrant students saw an overall decreasing trend of dropout percentage, while Overage students saw a overall constant trend."),
+                                p("Again, Title I, At Risk, and Overage students had significantly the highest dropout percentages from 1998-2019, while GT students had the lowest. ESL, GT, Title I, At Risk, ELL, and Immigrant students saw an overall increasing trend of dropout percentages from 1998-2019. Special Education and Migrant students saw an overall decreasing trend of dropout percentages, while Overage students saw a overall constant trend."),
                                 br(),
                                 hr(),
                                 br(),
                                 titlePanel("Annual Dropout Percentage by Group from 1998-2019"),
                                 plotOutput(outputId = "Groups_Boxplot2"),
-                                p("Overall, GT and Overage students had the lowest and highest annual dropout percentages from 1998-2019 respectfully. The rest of the groups in the boxplot below have very similar data and can be grouped together. During the years 2015-16, 2016-17, and 2018-19, homeless students had the highest annual dropout percentage of all the groups, while foster care students had the third highest."),
+                                p("Overall, GT and Overage students had the lowest and highest annual dropout percentages from 1998-2019 respectfully. The rest of the groups in the boxplot below have very similar averages and can be grouped together. During the years 2015-16, 2016-17, and 2018-19, homeless students had the highest annual dropout percentage of all the groups, while foster care students had the third highest."),
                               
                                 )
                                 
@@ -743,7 +743,7 @@ server<-function(input, output) {
     })
     
     output$Ethnicity_Labelplot1 <- renderPlot({
-        ggplot(tot_Afr, aes_string(x=input$u, y=input$t,col=input$d3,label=input$v)) + geom_label()
+        ggplot(tot_His, aes_string(x=input$u, y=input$t,col=input$d3,label=input$v)) + geom_label()
     })
     
     output$Ethnicity_Barplot2 <- renderPlotly({
@@ -751,7 +751,7 @@ server<-function(input, output) {
     })
     
     output$Ethnicity_Labelplot2 <- renderPlot({
-        ggplot(tot_Afr, aes_string(x=input$z, y=input$y,col=input$e3,label=input$a1)) + geom_label()
+        ggplot(tot_Wh, aes_string(x=input$z, y=input$y,col=input$e3,label=input$a1)) + geom_label()
     })
     
     output$Ethnicity_Boxplot <- renderPlot({
@@ -790,7 +790,7 @@ server<-function(input, output) {
         legend("topleft",legend = c("African American","Hispanic","White"),col = mycolor3,pch = 19,bty = "n",pt.cex = 1,cex = 0.7,text.col = "black",horiz = F ,inset = c(0.05, 0.05))
     })
     
-    output$Graphic3 <- renderPlot({
+    output$Graphic3 <- renderPlotly({
         # draw the histogram with the specified number of bins
         ggplot(total_drop_spec, aes_string(x=input$c1, y=input$b1,col=input$d1)) + geom_jitter() 
     })
@@ -800,17 +800,17 @@ server<-function(input, output) {
         ggplot(total_drop_spec, aes_string(x=input$f1, y=input$e1,col=input$g1,label=input$h1)) + geom_label() 
     })
     
-    output$Groups_Barplot <- renderPlot({
+    output$Groups_Barplot <- renderPlotly({
         # draw the histogram with the specified number of bins
         ggplot(tot_Overage, aes_string(x=input$j1, y=input$i1)) + geom_col() 
     })
     
-    output$Groups_Barplot1 <- renderPlot({
+    output$Groups_Barplot1 <- renderPlotly({
         # draw the histogram with the specified number of bins
         ggplot(tot_TitleI, aes_string(x=input$l1, y=input$k1)) + geom_col() 
     })
     
-    output$Groups_Barplot2 <- renderPlot({
+    output$Groups_Barplot2 <- renderPlotly({
         # draw the histogram with the specified number of bins
         ggplot(tot_AtRisk, aes_string(x=input$n1, y=input$m1)) + geom_col() 
     })
