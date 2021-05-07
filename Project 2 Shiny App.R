@@ -73,7 +73,7 @@ ui<- navbarPage("Explore Dropout Rates By:",theme=shinytheme("cerulean"),
                         br(),
                         p("I decided to focus on three main factors:",strong("Grade level, Race/Ethnicity,"),"and",strong("Student Characteristics."),),
                         br(),
-                        tags$p("Student characteristics include: Special Education, 504, Gifted and Talented (GT), At Risk, English Language Learner (ELL), dyslexic, ect.",tags$a(href="https://rptsvr1.tea.texas.gov/acctres/gloss1112.html","Click Here"),"for a full list of descriptions."),
+                        tags$p("Student characteristics include: Special Education, 504, Gifted and Talented (GT), At Risk, English Language Learner (ELL), dyslexic, etc.",tags$a(href="https://rptsvr1.tea.texas.gov/acctres/gloss1112.html","Click Here"),"for a full list of descriptions."),
                         br(),
                         tags$p("I scraped data from",tags$a(href="https://tea.texas.gov/reports-and-data/school-performance/accountability-research/completion-graduation-and-dropouts","TEA's Website"),"from 1998-2019 and analyzed the data. Here are my results."),
 
