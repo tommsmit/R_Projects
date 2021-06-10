@@ -13,7 +13,6 @@ library(tidyverse)
 require(XML)
 library(ggplot2)
 
-
 ################################################################################
 
 #Drop_Gender_Race: 2009-10 through 2018-19
@@ -29,10 +28,24 @@ library(ggplot2)
 ################################################################################
 
 
+
+
+
+
+
+################################################################################
+
+#I had to made revisions to the code due to updated package pdftools#
+
+#All "\r\n" should be changed to "\n" and all lines like line 47 must be altered#
+
+################################################################################
+
+
 url1<-("https://tea.texas.gov/sites/default/files/dropcomp_2018-19.pdf")
 download.file(url1, "Dropout Rate (2018-19)", mode = "wb")
 p1<-pdf_text(url1, "Dropout Rate (2018-19).pdf")
-p1<-strsplit(p1, "\r\n")
+p1<-strsplit(p1, "\n")
 table1<-data.frame(p1[[86]][7:13])
 rnums1<-nrow(table1)
 table1$Main<-as.character(table1[1:rnums1,1])
