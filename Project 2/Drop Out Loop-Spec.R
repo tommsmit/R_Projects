@@ -23,8 +23,8 @@ for (i in 1:length(school_year)){
   if (i==1){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table<-data.frame(p1[[86]][c(25:28,34:37)])
+    p1<-strsplit(dropout, "\n")
+    table<-data.frame(p1[[86]][c(29:32,41:44)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -69,8 +69,8 @@ for (i in 1:length(school_year)){
   } else if (i==2){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table<-data.frame(p1[[97]][c(24:27,33:37)])
+    p1<-strsplit(dropout, "\n")
+    table<-data.frame(p1[[97]][c(28:31,41:45)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -114,7 +114,7 @@ for (i in 1:length(school_year)){
   } else if (i==3){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
+    p1<-strsplit(dropout, "\n")
     table1<-data.frame(p1[[111]][c(5,7:9)])
     table2<-data.frame(p1[[112]][5:9])
     rnums1<-nrow(table1)
@@ -159,7 +159,7 @@ for (i in 1:length(school_year)){
   } else if (i==4){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
+    p1<-strsplit(dropout, "\n")
     table1<-data.frame(p1[[121]][c(5,7:9)])
     table2<-data.frame(p1[[122]][5:9])
     rnums1<-nrow(table1)
@@ -204,7 +204,7 @@ for (i in 1:length(school_year)){
   } else if (i==5){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
+    p1<-strsplit(dropout, "\n")
     table1<-data.frame(p1[[138]][c(5,7:9)])
     table2<-data.frame(p1[[139]][5:9])
     rnums1<-nrow(table1)
@@ -249,7 +249,7 @@ for (i in 1:length(school_year)){
   } else if (i==6){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
+    p1<-strsplit(dropout, "\n")
     table1<-data.frame(p1[[146]][c(5,7:9)])
     table2<-data.frame(p1[[147]][5:9])
     rnums1<-nrow(table1)
@@ -294,7 +294,7 @@ for (i in 1:length(school_year)){
   } else if (i==7){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
+    p1<-strsplit(dropout, "\n")
     table1<-data.frame(p1[[154]][c(5,7:9)])
     table2<-data.frame(p1[[155]][5:9])
     rnums1<-nrow(table1)
@@ -337,11 +337,10 @@ for (i in 1:length(school_year)){
     drop_spec<-drop_spec[c(1,10,2,11,3,4,5,12,7,13,14,6,8,15,9),]
     
   } else if (i==8){
-    i=8
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table<-data.frame(p1[[60]][c(6,8:10,18:22)])
+    p1<-strsplit(dropout, "\n")
+    table<-data.frame(p1[[60]][c(6,8:10,22:26)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -386,8 +385,8 @@ for (i in 1:length(school_year)){
   } else if (i==9){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table<-data.frame(p1[[61]][c(17,19:21,29:33)])
+    p1<-strsplit(dropout, "\n")
+    table<-data.frame(p1[[61]][c(21,23:25,37:41)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -432,8 +431,8 @@ for (i in 1:length(school_year)){
   } else if (i==10){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table<-data.frame(p1[[62]][c(14,16:18,27:31)])
+    p1<-strsplit(dropout, "\n")
+    table<-data.frame(p1[[62]][c(17,19:21,35:39)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -478,8 +477,8 @@ for (i in 1:length(school_year)){
   } else if (i==11){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table1<-data.frame(p1[[67]][c(25,27:29)])
+    p1<-strsplit(dropout, "\n")
+    table1<-data.frame(p1[[67]][c(30,32:34)])
     table2<-data.frame(p1[[68]][6:10])
     rnums1<-nrow(table1)
     rnums2<-nrow(table2)
@@ -523,8 +522,8 @@ for (i in 1:length(school_year)){
   } else if (i==12){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table<-data.frame(p1[[75]][c(13,15:17,26:30)])
+    p1<-strsplit(dropout, "\n")
+    table<-data.frame(p1[[75]][c(15,17:19,33:37)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -569,8 +568,8 @@ for (i in 1:length(school_year)){
   } else if (i==13){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table<-data.frame(p1[[76]][c(6,8:10,19:23)])
+    p1<-strsplit(dropout, "\n")
+    table<-data.frame(p1[[76]][c(6,8:10,24:28)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -615,8 +614,8 @@ for (i in 1:length(school_year)){
   } else if (i==14){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table<-data.frame(p1[[76]][c(6:10,20:24)])
+    p1<-strsplit(dropout, "\n")
+    table<-data.frame(p1[[76]][c(6:10,25:29)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -662,8 +661,8 @@ for (i in 1:length(school_year)){
   } else if (i==15){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table<-data.frame(p1[[76]][c(12:16, 26:30)])
+    p1<-strsplit(dropout, "\n")
+    table<-data.frame(p1[[76]][c(15:19,34:38)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -709,8 +708,8 @@ for (i in 1:length(school_year)){
   } else if (i==15){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table<-data.frame(p1[[76]][c(12:16,26:30)])
+    p1<-strsplit(dropout, "\n")
+    table<-data.frame(p1[[76]][c(15:19,34:38)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -756,8 +755,8 @@ for (i in 1:length(school_year)){
   } else if (i==16){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
-    table<-data.frame(p1[[79]][c(17:21,31:35)])
+    p1<-strsplit(dropout, "\n")
+    table<-data.frame(p1[[79]][c(20:24,40:43)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -803,8 +802,8 @@ for (i in 1:length(school_year)){
   } else if (i==17){
     b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year[i],".pdf")
     dropout<-pdf_text(b)
-    p2<-strsplit(dropout, "\r\n")
-    table<-data.frame(p2[[79]][c(16:20,30:34)])
+    p2<-strsplit(dropout, "\n")
+    table<-data.frame(p2[[79]][c(19:23,38:42)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -850,8 +849,8 @@ for (i in 1:length(school_year)){
   } else if (i==18){
     b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year[i],".pdf")
     dropout<-pdf_text(b)
-    p2<-strsplit(dropout, "\r\n")
-    table<-data.frame(p2[[79]][c(17:21,30:35)])
+    p2<-strsplit(dropout, "\n")
+    table<-data.frame(p2[[79]][c(20:24,38:43)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -897,8 +896,8 @@ for (i in 1:length(school_year)){
   } else if (i==19){
     b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year[i],".pdf")
     dropout<-pdf_text(b)
-    p2<-strsplit(dropout, "\r\n")
-    table<-data.frame(p2[[84]][c(15:19,28:35)])
+    p2<-strsplit(dropout, "\n")
+    table<-data.frame(p2[[84]][c(18:22,36:43)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -944,8 +943,8 @@ for (i in 1:length(school_year)){
   } else if (i==20){
     b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year[i],".pdf")
     dropout<-pdf_text(b)
-    p2<-strsplit(dropout, "\r\n")
-    table<-data.frame(p2[[84]][c(14:18,27:35)])
+    p2<-strsplit(dropout, "\n")
+    table<-data.frame(p2[[84]][c(17:21,35:43)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -991,8 +990,8 @@ for (i in 1:length(school_year)){
   } else if (i==21){
     b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year[i],".pdf")
     dropout<-pdf_text(b)
-    p2<-strsplit(dropout, "\r\n")
-    table<-data.frame(p2[[84]][c(14:19,28:36)])
+    p2<-strsplit(dropout, "\n")
+    table<-data.frame(p2[[84]][c(17:22,36:44)])
     rnums<-nrow(table)
     table$Main<-as.character(table[1:rnums,1])
     table$Main<-trimws(table$Main, which="left")
@@ -1039,6 +1038,7 @@ for (i in 1:length(school_year)){
   print(paste0("Finished Year: ", school_year[i]))
   
 }
+
 
 
 
