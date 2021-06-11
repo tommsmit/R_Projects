@@ -22,15 +22,26 @@ total<-data.frame(Race=character(),Female=numeric(),Female_Percentage=numeric(),
 a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
 b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year[i],".pdf")
 
+
+################################################################################
+
+#I had to revise my code due to pdftools update. Now all "r\n\" must be changed
+
+#to "\n" as well as all lines like line 100#
+
+################################################################################
+
+
+
 for (i in 1:length(school_year)){
   if (i==1){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
-    p1<-strsplit(dropout, "\r\n")
+    p1<-strsplit(dropout, "\n")
   } else if (i==2){
       a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
       dropout<-pdf_text(a)
-      p2<-strsplit(dropout, "\r\n")
+      p2<-strsplit(dropout, "\n")
   } else if (i==3){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year[i],".pdf")
     dropout<-pdf_text(a)
