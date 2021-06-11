@@ -14,6 +14,7 @@ library(tictoc)
 library(tidyverse)
 require(XML)
 library(ggplot2)
+library(plotly)
 
 school_year1<-c("2002-03","2003-04","2004-05","2005-06","2006-07","2007-08","2008-09")
 school_year2<-c("2009-10","2010-11","2011-12","2012-13","2013-14","2014-15","2015-16","2016-17","2017-18","2018-19")
@@ -33,118 +34,118 @@ tot_10_19<-data.frame(Race=character(),Female=numeric(),Female_Percentage=numeri
 
 
 for (i in 1:length(school_year1)){
-    a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year1[i],".pdf")
-    dropout1<-pdf_text(a)
-    p1<-strsplit(dropout1, "\r\n")
-    table1<-data.frame(p1[[t1[i]]][c(8,9,11:14,16,17,19:22,24,25,27:30,32,33,35:38)])
-    table2<-data.frame(p1[[t2[i]]][c(8,9,11:14,16,17,19:22)])
-    rnums1<-nrow(table1)
-    rnums2<-nrow(table2)
-    table1$Main<-as.character(table1[1:rnums1,1])
-    table2$Main<-as.character(table2[1:rnums2,1])
-    table1$Main<-trimws(table1$Main, which="left")
-    table2$Main<-trimws(table2$Main, which="left")
-    table1$Main<-stripWhitespace(table1$Main)
-    table2$Main<-stripWhitespace(table2$Main)
-    table1$Main<-gsub("(?:,)","", table1$Main)
-    table2$Main<-gsub("(?:,)","", table2$Main)
-    table1$Main<-gsub("(?:African American)","African-American", table1$Main)
-    table2$Main<-gsub("(?:African American)","African-American", table2$Main)
-    table1$Main<-gsub("(?:Asian/Pacific)","Asian/Pacific-Islander", table1$Main)
-    table2$Main<-gsub("(?:Asian/Pacific)","Asian/Pacific-Islander", table2$Main)
-    table1$Main<-gsub("(?:Native American)","Native-American", table1$Main)
-    table2$Main<-gsub("(?:Native American)","Native-American", table2$Main)
-    table1$Main<-gsub("(?:State)","Total", table1$Main)
-    table2$Main<-gsub("(?:State)","Total", table2$Main)
-    table1$Main<-gsub("(?:<)","", table1$Main)
-    table2$Main<-gsub("(?:<)","", table2$Main)
-    
-    split_var1<-as.data.frame(ldply(strsplit(table1$Main, split = " ")))
-    drop_gender_race1<-data.frame(Race=character(),Female=numeric(),Female_Percentage=numeric(),Male=numeric(),Male_Percentage=numeric(),Female_Dropouts=numeric(),Female_Dropouts_Percentage=numeric(),Male_Dropouts=numeric(),Male_Dropouts_Percentage=numeric(),Annual_Female_Dropout_Rate=numeric(),Annual_Male_Dropout_Rate=numeric(),Grade_Level=numeric(),School_Year=character())
-    drop_gender_race1<-drop_gender_race1[1:rnums1,]
-    drop_gender_race1$Main<-table1$Main
-    drop_gender_race1$Race<-split_var1[,1]
-    drop_gender_race1$Female<-split_var1[,2]
-    drop_gender_race1$Female_Percentage<-split_var1[,3]
-    drop_gender_race1$Male<-split_var1[,4]
-    drop_gender_race1$Male_Percentage<-split_var1[,5]
-    drop_gender_race1$Female_Dropouts<-split_var1[,6]
-    drop_gender_race1$Female_Dropouts_Percentage<-split_var1[,7]
-    drop_gender_race1$Male_Dropouts<-split_var1[,8]
-    drop_gender_race1$Male_Dropouts_Percentage<-split_var1[,9]
-    drop_gender_race1$Annual_Female_Dropout_Rate<-split_var1[,10]
-    drop_gender_race1$Annual_Male_Dropout_Rate<-split_var1[,11]
-    drop_gender_race1$School_Year<-school_year1[i]
-    drop_gender_race1$Female<-as.numeric(drop_gender_race1$Female)
-    drop_gender_race1$Female_Percentage<-as.numeric(drop_gender_race1$Female_Percentage)
-    drop_gender_race1$Male<-as.numeric(drop_gender_race1$Male)
-    drop_gender_race1$Male_Percentage<-as.numeric(drop_gender_race1$Male_Percentage)
-    drop_gender_race1$Female_Dropouts<-as.numeric(drop_gender_race1$Female_Dropouts)
-    drop_gender_race1$Female_Dropouts_Percentage<-as.numeric(drop_gender_race1$Female_Dropouts_Percentage)
-    drop_gender_race1$Male_Dropouts<-as.numeric(drop_gender_race1$Male_Dropouts)
-    drop_gender_race1$Male_Dropouts_Percentage<-as.numeric(drop_gender_race1$Male_Dropouts_Percentage)
-    drop_gender_race1$Annual_Female_Dropout_Rate<-as.numeric(drop_gender_race1$Annual_Female_Dropout_Rate)
-    drop_gender_race1$Annual_Male_Dropout_Rate<-as.numeric(drop_gender_race1$Annual_Male_Dropout_Rate)
-    drop_gender_race1<-select(drop_gender_race1,-Main)
-    
-    split_var2<-as.data.frame(ldply(strsplit(table2$Main, split = " ")))
-    drop_gender_race2<-data.frame(Race=character(),Female=numeric(),Female_Percentage=numeric(),Male=numeric(),Male_Percentage=numeric(),Female_Dropouts=numeric(),Female_Dropouts_Percentage=numeric(),Male_Dropouts=numeric(),Male_Dropouts_Percentage=numeric(),Annual_Female_Dropout_Rate=numeric(),Annual_Male_Dropout_Rate=numeric(),Grade_Level=numeric(),School_Year=character())
-    drop_gender_race2<-drop_gender_race1[1:rnums2,]
-    drop_gender_race2$Main<-table2$Main
-    drop_gender_race2$Race<-split_var2[,1]
-    drop_gender_race2$Female<-split_var2[,2]
-    drop_gender_race2$Female_Percentage<-split_var2[,3]
-    drop_gender_race2$Male<-split_var2[,4]
-    drop_gender_race2$Male_Percentage<-split_var2[,5]
-    drop_gender_race2$Female_Dropouts<-split_var2[,6]
-    drop_gender_race2$Female_Dropouts_Percentage<-split_var2[,7]
-    drop_gender_race2$Male_Dropouts<-split_var2[,8]
-    drop_gender_race2$Male_Dropouts_Percentage<-split_var2[,9]
-    drop_gender_race2$Annual_Female_Dropout_Rate<-split_var2[,10]
-    drop_gender_race2$Annual_Male_Dropout_Rate<-split_var2[,11]
-    drop_gender_race2$School_Year<-school_year1[i]
-    drop_gender_race2$Female<-as.numeric(drop_gender_race2$Female)
-    drop_gender_race2$Female_Percentage<-as.numeric(drop_gender_race2$Female_Percentage)
-    drop_gender_race2$Male<-as.numeric(drop_gender_race2$Male)
-    drop_gender_race2$Male_Percentage<-as.numeric(drop_gender_race2$Male_Percentage)
-    drop_gender_race2$Female_Dropouts<-as.numeric(drop_gender_race2$Female_Dropouts)
-    drop_gender_race2$Female_Dropouts_Percentage<-as.numeric(drop_gender_race2$Female_Dropouts_Percentage)
-    drop_gender_race2$Male_Dropouts<-as.numeric(drop_gender_race2$Male_Dropouts)
-    drop_gender_race2$Male_Dropouts_Percentage<-as.numeric(drop_gender_race2$Male_Dropouts_Percentage)
-    drop_gender_race2$Annual_Female_Dropout_Rate<-as.numeric(drop_gender_race2$Annual_Female_Dropout_Rate)
-    drop_gender_race2$Annual_Male_Dropout_Rate<-as.numeric(drop_gender_race2$Annual_Male_Dropout_Rate)
-    drop_gender_race2<-select(drop_gender_race2,-Main)
-    
-    drop_gender_race<-rbind(drop_gender_race1,drop_gender_race2)
-    drop_gender_race[1:6,12]<-7
-    drop_gender_race[7:12,12]<-8
-    drop_gender_race[13:18,12]<-9
-    drop_gender_race[19:24,12]<-10
-    drop_gender_race[25:30,12]<-11
-    drop_gender_race[31:36,12]<-12
-    drop_gender_race<-rbind(drop_gender_race)
-    drop_gender_race<-drop_gender_race[,c(12,1,2,3,4,5,6,7,8,9,10,11,13)]
-     
-    tot_02_09<-rbind(tot_02_09,drop_gender_race)
-    print(paste0("Finished Year: ", school_year1[i]))
+  a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year1[i],".pdf")
+  dropout1<-pdf_text(a)
+  p1<-strsplit(dropout1, "\n")
+  table1<-data.frame(p1[[t1[i]]][c(8,9,11:13,17,18,20:22,26,27,29:31,35,36,38:40)])
+  table2<-data.frame(p1[[t2[i]]][c(8,9,11:13,17,18,20:22)])
+  rnums1<-nrow(table1)
+  rnums2<-nrow(table2)
+  table1$Main<-as.character(table1[1:rnums1,1])
+  table2$Main<-as.character(table2[1:rnums2,1])
+  table1$Main<-trimws(table1$Main, which="left")
+  table2$Main<-trimws(table2$Main, which="left")
+  table1$Main<-stripWhitespace(table1$Main)
+  table2$Main<-stripWhitespace(table2$Main)
+  table1$Main<-gsub("(?:,)","", table1$Main)
+  table2$Main<-gsub("(?:,)","", table2$Main)
+  table1$Main<-gsub("(?:African American)","African-American", table1$Main)
+  table2$Main<-gsub("(?:African American)","African-American", table2$Main)
+  table1$Main<-gsub("(?:Asian/Pacific)","Asian/Pacific-Islander", table1$Main)
+  table2$Main<-gsub("(?:Asian/Pacific)","Asian/Pacific-Islander", table2$Main)
+  table1$Main<-gsub("(?:Native American)","Native-American", table1$Main)
+  table2$Main<-gsub("(?:Native American)","Native-American", table2$Main)
+  table1$Main<-gsub("(?:State)","Total", table1$Main)
+  table2$Main<-gsub("(?:State)","Total", table2$Main)
+  table1$Main<-gsub("(?:<)","", table1$Main)
+  table2$Main<-gsub("(?:<)","", table2$Main)
+  
+  split_var1<-as.data.frame(ldply(strsplit(table1$Main, split = " ")))
+  drop_gender_race1<-data.frame(Race=character(),Female=numeric(),Female_Percentage=numeric(),Male=numeric(),Male_Percentage=numeric(),Female_Dropouts=numeric(),Female_Dropouts_Percentage=numeric(),Male_Dropouts=numeric(),Male_Dropouts_Percentage=numeric(),Annual_Female_Dropout_Rate=numeric(),Annual_Male_Dropout_Rate=numeric(),Grade_Level=numeric(),School_Year=character())
+  drop_gender_race1<-drop_gender_race1[1:rnums1,]
+  drop_gender_race1$Main<-table1$Main
+  drop_gender_race1$Race<-split_var1[,1]
+  drop_gender_race1$Female<-split_var1[,2]
+  drop_gender_race1$Female_Percentage<-split_var1[,3]
+  drop_gender_race1$Male<-split_var1[,4]
+  drop_gender_race1$Male_Percentage<-split_var1[,5]
+  drop_gender_race1$Female_Dropouts<-split_var1[,6]
+  drop_gender_race1$Female_Dropouts_Percentage<-split_var1[,7]
+  drop_gender_race1$Male_Dropouts<-split_var1[,8]
+  drop_gender_race1$Male_Dropouts_Percentage<-split_var1[,9]
+  drop_gender_race1$Annual_Female_Dropout_Rate<-split_var1[,10]
+  drop_gender_race1$Annual_Male_Dropout_Rate<-split_var1[,11]
+  drop_gender_race1$School_Year<-school_year1[i]
+  drop_gender_race1$Female<-as.numeric(drop_gender_race1$Female)
+  drop_gender_race1$Female_Percentage<-as.numeric(drop_gender_race1$Female_Percentage)
+  drop_gender_race1$Male<-as.numeric(drop_gender_race1$Male)
+  drop_gender_race1$Male_Percentage<-as.numeric(drop_gender_race1$Male_Percentage)
+  drop_gender_race1$Female_Dropouts<-as.numeric(drop_gender_race1$Female_Dropouts)
+  drop_gender_race1$Female_Dropouts_Percentage<-as.numeric(drop_gender_race1$Female_Dropouts_Percentage)
+  drop_gender_race1$Male_Dropouts<-as.numeric(drop_gender_race1$Male_Dropouts)
+  drop_gender_race1$Male_Dropouts_Percentage<-as.numeric(drop_gender_race1$Male_Dropouts_Percentage)
+  drop_gender_race1$Annual_Female_Dropout_Rate<-as.numeric(drop_gender_race1$Annual_Female_Dropout_Rate)
+  drop_gender_race1$Annual_Male_Dropout_Rate<-as.numeric(drop_gender_race1$Annual_Male_Dropout_Rate)
+  drop_gender_race1<-select(drop_gender_race1,-Main)
+  
+  split_var2<-as.data.frame(ldply(strsplit(table2$Main, split = " ")))
+  drop_gender_race2<-data.frame(Race=character(),Female=numeric(),Female_Percentage=numeric(),Male=numeric(),Male_Percentage=numeric(),Female_Dropouts=numeric(),Female_Dropouts_Percentage=numeric(),Male_Dropouts=numeric(),Male_Dropouts_Percentage=numeric(),Annual_Female_Dropout_Rate=numeric(),Annual_Male_Dropout_Rate=numeric(),Grade_Level=numeric(),School_Year=character())
+  drop_gender_race2<-drop_gender_race1[1:rnums2,]
+  drop_gender_race2$Main<-table2$Main
+  drop_gender_race2$Race<-split_var2[,1]
+  drop_gender_race2$Female<-split_var2[,2]
+  drop_gender_race2$Female_Percentage<-split_var2[,3]
+  drop_gender_race2$Male<-split_var2[,4]
+  drop_gender_race2$Male_Percentage<-split_var2[,5]
+  drop_gender_race2$Female_Dropouts<-split_var2[,6]
+  drop_gender_race2$Female_Dropouts_Percentage<-split_var2[,7]
+  drop_gender_race2$Male_Dropouts<-split_var2[,8]
+  drop_gender_race2$Male_Dropouts_Percentage<-split_var2[,9]
+  drop_gender_race2$Annual_Female_Dropout_Rate<-split_var2[,10]
+  drop_gender_race2$Annual_Male_Dropout_Rate<-split_var2[,11]
+  drop_gender_race2$School_Year<-school_year1[i]
+  drop_gender_race2$Female<-as.numeric(drop_gender_race2$Female)
+  drop_gender_race2$Female_Percentage<-as.numeric(drop_gender_race2$Female_Percentage)
+  drop_gender_race2$Male<-as.numeric(drop_gender_race2$Male)
+  drop_gender_race2$Male_Percentage<-as.numeric(drop_gender_race2$Male_Percentage)
+  drop_gender_race2$Female_Dropouts<-as.numeric(drop_gender_race2$Female_Dropouts)
+  drop_gender_race2$Female_Dropouts_Percentage<-as.numeric(drop_gender_race2$Female_Dropouts_Percentage)
+  drop_gender_race2$Male_Dropouts<-as.numeric(drop_gender_race2$Male_Dropouts)
+  drop_gender_race2$Male_Dropouts_Percentage<-as.numeric(drop_gender_race2$Male_Dropouts_Percentage)
+  drop_gender_race2$Annual_Female_Dropout_Rate<-as.numeric(drop_gender_race2$Annual_Female_Dropout_Rate)
+  drop_gender_race2$Annual_Male_Dropout_Rate<-as.numeric(drop_gender_race2$Annual_Male_Dropout_Rate)
+  drop_gender_race2<-select(drop_gender_race2,-Main)
+  
+  drop_gender_race<-rbind(drop_gender_race1,drop_gender_race2)
+  drop_gender_race[1:6,12]<-7
+  drop_gender_race[7:12,12]<-8
+  drop_gender_race[13:18,12]<-9
+  drop_gender_race[19:24,12]<-10
+  drop_gender_race[25:30,12]<-11
+  drop_gender_race[31:36,12]<-12
+  drop_gender_race<-rbind(drop_gender_race)
+  drop_gender_race<-drop_gender_race[,c(12,1,2,3,4,5,6,7,8,9,10,11,13)]
+  
+  tot_02_09<-rbind(tot_02_09,drop_gender_race)
+  print(paste0("Finished Year: ", school_year1[i]))
 }    
-    
+
 
 
 for (j in 1:length(school_year2)){
   if (j<=5){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year2[j],".pdf")
     dropout1<-pdf_text(a)
-    p1<-strsplit(dropout1, "\r\n")
-    table3<-data.frame(p1[[t3[j]]][c(8:15,17:24,26:33,35:39)])
-    table4<-data.frame(p1[[t4[j]]][c(7:9,11:18,20:27)])
+    p1<-strsplit(dropout1, "\n")
+    table3<-data.frame(p1[[t3[j]]][c(8:14,19:24,28:34,38:42)])
+    table4<-data.frame(p1[[t4[j]]][c(7:8,12:18,22:28)])
     
   } else if(j>5){
     b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year2[j],".pdf")
     dropout2<-pdf_text(b)
-    p2<-strsplit(dropout2, "\r\n")
-    table3<-data.frame(p2[[t3[j]]][c(8:15,17:24,26:33,35:39)])
-    table4<-data.frame(p2[[t4[j]]][c(7:9,11:18,20:27)])
+    p2<-strsplit(dropout2, "\n")
+    table3<-data.frame(p2[[t3[j]]][c(8:14,18:24,28:34,38:42)])
+    table4<-data.frame(p2[[t4[j]]][c(7:8,12:18,22:28)])
   }
   
   rnums3<-nrow(table3)
@@ -224,7 +225,7 @@ for (j in 1:length(school_year2)){
   drop_gender_race4$Annual_Female_Dropout_Rate<-as.numeric(drop_gender_race4$Annual_Female_Dropout_Rate)
   drop_gender_race4$Annual_Male_Dropout_Rate<-as.numeric(drop_gender_race4$Annual_Male_Dropout_Rate)
   drop_gender_race4<-select(drop_gender_race4,-Main)
-
+  
   adrop_gender_race<-rbind(drop_gender_race3,drop_gender_race4)
   adrop_gender_race[1:8,12]<-7
   adrop_gender_race[9:16,12]<-8
@@ -233,7 +234,7 @@ for (j in 1:length(school_year2)){
   adrop_gender_race[33:40,12]<-11
   adrop_gender_race[41:48,12]<-12
   adrop_gender_race<-adrop_gender_race[,c(12,1,2,3,4,5,6,7,8,9,10,11,13)]
-
+  
   tot_10_19<-rbind(tot_10_19,adrop_gender_race)
   print(paste0("Finished Year: ", school_year2[j]))
   
