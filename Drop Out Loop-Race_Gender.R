@@ -36,9 +36,9 @@ tot_10_19<-data.frame(Race=character(),Female=numeric(),Female_Percentage=numeri
 for (i in 1:length(school_year1)){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year1[i],".pdf")
     dropout1<-pdf_text(a)
-    p1<-strsplit(dropout1, "\r\n")
-    table1<-data.frame(p1[[t1[i]]][c(8,9,11:14,16,17,19:22,24,25,27:30,32,33,35:38)])
-    table2<-data.frame(p1[[t2[i]]][c(8,9,11:14,16,17,19:22)])
+    p1<-strsplit(dropout1, "\n")
+    table1<-data.frame(p1[[t1[i]]][c(8,9,11:13,17,18,20:22,26,27,29:31,35,36,38:40)])
+    table2<-data.frame(p1[[t2[i]]][c(8,9,11:13,17,18,20:22)])
     rnums1<-nrow(table1)
     rnums2<-nrow(table2)
     table1$Main<-as.character(table1[1:rnums1,1])
@@ -136,16 +136,16 @@ for (j in 1:length(school_year2)){
   if (j<=5){
     a<-paste0("https://tea.texas.gov/sites/default/files/DropComp_",school_year2[j],".pdf")
     dropout1<-pdf_text(a)
-    p1<-strsplit(dropout1, "\r\n")
-    table3<-data.frame(p1[[t3[j]]][c(8:15,17:24,26:33,35:39)])
-    table4<-data.frame(p1[[t4[j]]][c(7:9,11:18,20:27)])
+    p1<-strsplit(dropout1, "\n")
+    table3<-data.frame(p1[[t3[j]]][c(8:14,19:24,28:34,38:42)])
+    table4<-data.frame(p1[[t4[j]]][c(7:8,12:18,22:28)])
     
   } else if(j>5){
     b<-paste0("https://tea.texas.gov/sites/default/files/dropcomp_",school_year2[j],".pdf")
     dropout2<-pdf_text(b)
-    p2<-strsplit(dropout2, "\r\n")
-    table3<-data.frame(p2[[t3[j]]][c(8:15,17:24,26:33,35:39)])
-    table4<-data.frame(p2[[t4[j]]][c(7:9,11:18,20:27)])
+    p2<-strsplit(dropout2, "\n")
+    table3<-data.frame(p2[[t3[j]]][c(8:14,18:24,28:34,38:42)])
+    table4<-data.frame(p2[[t4[j]]][c(7:8,12:18,22:28)])
   }
   
   rnums3<-nrow(table3)
