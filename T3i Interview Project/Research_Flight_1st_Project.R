@@ -2,14 +2,24 @@ library(tree)
 library(tidyverse)
 library(sem)
 library(ggplot2)
+library(plotly)
+
+data<-read.csv("C:/SAS files/msk_ans_for_TS_with_key_delD.csv")
 
 
-data<-read.csv("C:/Users/12108/OneDrive/Desktop/msk_ans_for_TS_with_key_delD.csv")
 
+y<-table(data[,c(4,9)])
+barplot(y)
+
+d<-matrix(c(0,383,313,1,265,276),nrow=3)
+chisq.test(d)$expected
+fisher.test(d)
 
 #################### Contingency Tables and Tests for Independence #####################
 
 table(data[,3:4])
+
+table(data$prior_LOWER_EXTREMITY)
 
 a<-matrix(c(0,0,0,0,0,0,185,463,14,4,137,43,1,390,0,0),nrow=8)
 
@@ -46,12 +56,14 @@ c
 chisq.test(c)$expected
 fisher.test(c)
 
+
+# Due to low expected frequencies I simulated the p-value for fisher's exact test.
+# There exists an association b/t the variables Class and result.
+
 set.seed(20150828)
 fisher.test(c, simulate.p.value=TRUE, B = 1e5)
 
 
-# Due to low expected frequencies I simulated the p-value for fisher's exact test.
-# There exists an association b/t the variables Class and result.
 
 
 
@@ -63,11 +75,20 @@ x<-table(data[,c(3,2)])
 x
 barplot(x)
 
-ggplot(data, aes(x = class, y = result, col = result)) + geom_jitter()
-ggplot(data, aes(x = class, y = result, col = result)) + geom_col()
+ggplotly(ggplot(data, aes(x = class, y = result, col = finish_status)) + geom_jitter())
+ggplotly(ggplot(data, aes(x =finish_status , y = result, col = class)) + geom_jitter())
+ggplotly(ggplot(data, aes(x = class, y = result, col = result)) + geom_jitter())
+ggplotly(ggplot(data, aes(x = class, y = result, col = result)) + geom_col())
+ggplotly(ggplot(data, aes(x = prior_LOWER_EXTREMITY, y = finish_status, col = result)) + geom_jitter())
+ggplotly(ggplot(data, aes(x = prior_HEAD_NECK, y = finish_status, col = result)) + geom_jitter())
 
 
-hclust(data$result)
+
+
+
+
+
+
 
 pairs(data)
 
