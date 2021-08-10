@@ -3,13 +3,16 @@ library(tidyverse)
 library(sem)
 library(ggplot2)
 library(plotly)
+library(vcd)
+library(treemapify)
 
-data<-read.csv("C:/SAS files/msk_ans_for_TS_with_key_delD.csv")
+dat<-read.csv("C:/SAS files/msk_ans_for_TS_with_key_delD.csv")
 
 
 
-y<-table(data[,c(4,9)])
-barplot(y)
+y<-table(dat[,c(4,9)])
+y
+assocplot(y)
 
 d<-matrix(c(0,383,313,1,265,276),nrow=3)
 chisq.test(d)$expected
@@ -17,13 +20,7 @@ fisher.test(d)
 
 #################### Contingency Tables and Tests for Independence #####################
 
-table(data[,3:4])
-
-table(data$prior_LOWER_EXTREMITY)
-
-a<-matrix(c(0,0,0,0,0,0,185,463,14,4,137,43,1,390,0,0),nrow=8)
-
-a
+a<-table(dat[,3:4])
 
 chisq.test(a)
 chisq.test(a,correct=F)$expected
@@ -35,23 +32,18 @@ fisher.test(a)
 #finish_status.
 
 
-table(data[,2:4])
+table(dat[,2:4])
 
 
-table(data[,c(2,4)])
-b<-matrix(c(48,51,51,62,55,56,41,41,52,40,25,64,62,69,25,50,21,50,46,42,27,29,43,43,71,73),nrow = 13)
-b
+b<-table(dat[,c(2,4)])
 chisq.test(b,correct=F)$expected
 chisq.test(b)
 
 # Based on Chi-Square Test of Independence, there exists an association between
 # the variables Class and Finish_Status
 
-table(data[,2:3])
+c<-table(dat[,2:3])
 
-c<-matrix(c(0,0,0,0,0,3,0,0,0,10,1,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,20,6,27,6,13,8,5,5,8,3,11,15,10,2,1,0,1,3,0,0,0,2,8,4,7,15,0,0,0,0,0,1,0,0,0,0,0,0,0,47,18,19,14,34,34,37,22,19,22,27,49,48,15,13,19,28,21,17,10,7,7,12,6,13,17,33,38,32,34,34,39,31,34,45,28,19,51,45),nrow = 13)
-
-c
 
 chisq.test(c)$expected
 fisher.test(c)
@@ -65,34 +57,200 @@ fisher.test(c, simulate.p.value=TRUE, B = 1e5)
 
 
 
+##################### Correlation between Variables ##############################
+
+dat$finish_status2<-ifelse(dat$finish_status == "Finish",1,0)
+
+attach(dat)
+
+cor.test(finish_status2,prior_LOWER_EXTREMITY)
+
+
+
+
 
 
 
 
 ############################# Visual Analysis ####################################
 
-x<-table(data[,c(3,2)])
+x<-table(dat[,c(3,2)])
 x
 barplot(x)
 
-ggplotly(ggplot(data, aes(x = class, y = result, col = finish_status)) + geom_jitter())
-ggplotly(ggplot(data, aes(x =finish_status , y = result, col = class)) + geom_jitter())
-ggplotly(ggplot(data, aes(x = class, y = result, col = result)) + geom_jitter())
-ggplotly(ggplot(data, aes(x = class, y = result, col = result)) + geom_col())
-ggplotly(ggplot(data, aes(x = prior_LOWER_EXTREMITY, y = finish_status, col = result)) + geom_jitter())
-ggplotly(ggplot(data, aes(x = prior_HEAD_NECK, y = finish_status, col = result)) + geom_jitter())
+ggplotly(ggplot(dat, aes(x = class, y = result, col = finish_status)) + geom_jitter())
+ggplotly(ggplot(dat, aes(x =finish_status , y = result, col = class)) + geom_jitter())
+ggplotly(ggplot(dat, aes(x = class, y = result, col = result)) + geom_jitter())
+ggplotly(ggplot(dat, aes(x = class, y = result, col = result)) + geom_col())
+ggplotly(ggplot(dat, aes(x = prior_LOWER_EXTREMITY, y = finish_status, col = result)) + geom_jitter())
+ggplotly(ggplot(dat, aes(x = prior_HEAD_NECK, y = finish_status, col = result)) + geom_jitter())
+
+
+ggplot(dat, aes(x = class, y = result, col = finish_status)) + geom_jitter()
+ggplot(dat, aes(x =finish_status , y = result, col = class)) + geom_jitter()
+ggplot(dat, aes(x = class, y = result, col = result)) + geom_jitter()
+ggplot(dat, aes(x = class, fill = result)) + geom_bar()
+ggplot(dat, aes(x = class, fill = finish_status)) + geom_bar()
+ggplot(dat, aes(x = prior_LOWER_EXTREMITY, fill = finish_status)) + geom_bar()
+
+ggplot(dat, aes(x = prior_LOWER_EXTREMITY, y = finish_status, col = result)) + geom_jitter()
+ggplot(dat, aes(x = prior_HEAD_NECK, y = finish_status, col = result)) + geom_jitter()
+
+
+
+assocplot(a)
+
+#We can see that Class 19-004 stands out from the rest
+assocplot(b)
+
+assocplot(c)
+assocplot(y)
+mosai
+mosaicplot(a,shade = TRUE)
+
+#We can see that Class 19-004 stands out from the rest. There were more than 
+#students who finished the program than expected and vice versa. 
+mosaicplot(b,shade = TRUE, title("Mosaic Plot: Class vs Finish_Status"))
+
+#Good mosaic plot showing which classes had more/less than expected in certain
+#results.
+mosaicplot(c,shade = TRUE,title("Mosaic Plot: Class vs Result"))
+
+mosaicplot(y,shade = TRUE)
+
+
+
+spineplot(a)
+
+#We can easily see the classes with the most/least proportion of finishers and
+#non-finishers.
+spineplot(b)
+
+#We can again compare the proportions of type of result by class. 
+spineplot(c)
+
+spineplot(y)
+
+
+
+
+# create a pie chart by Class
+plotdata <- dat %>%
+  count(class) %>%
+  arrange(desc(class)) %>%
+  mutate(prop = round(n*100/sum(n), 1),
+         lab.ypos = cumsum(prop) - 0.5*prop)
+
+plotdata$label <- paste0(plotdata$class, "\n",
+                         round(plotdata$prop), "%")
+
+ggplot(plotdata, 
+       aes(x = "", 
+           y = prop, 
+           fill = class)) +
+  geom_bar(width = 1, 
+           stat = "identity", 
+           color = "black") +
+  geom_text(aes(y = lab.ypos, label = label), 
+            color = "black") +
+  coord_polar("y", 
+              start = 0, 
+              direction = -1) +
+  theme_void() +
+  theme(legend.position = "FALSE") +
+  labs(title = "Participants by Class")
 
 
 
 
 
 
+# create a pie chart by Result
+plotdata <- dat %>%
+  count(result) %>%
+  arrange(desc(result)) %>%
+  mutate(prop = round(n*100/sum(n), 1),
+         lab.ypos = cumsum(prop) - 0.5*prop)
+
+plotdata$label <- paste0(plotdata$result, "\n",
+                         round(plotdata$prop), "%")
+
+ggplot(plotdata, 
+       aes(x = "", 
+           y = prop, 
+           fill = result)) +
+  geom_bar(width = 1, 
+           stat = "identity", 
+           color = "black") +
+  geom_text(aes(y = lab.ypos, label = label), 
+            color = "black") +
+  coord_polar("y", 
+              start = 0, 
+              direction = -1) +
+  theme_void() +
+  theme(legend.position = "FALSE") +
+  labs(title = "Participants by Result")
 
 
 
-pairs(data)
+
+
+# create a pie chart by Finish_Status
+plotdata <- dat %>%
+  count(finish_status) %>%
+  arrange(desc(finish_status)) %>%
+  mutate(prop = round(n*100/sum(n), 1),
+         lab.ypos = cumsum(prop) - 0.5*prop)
+
+plotdata$label <- paste0(plotdata$finish_status, "\n",
+                         round(plotdata$prop), "%")
+
+ggplot(plotdata, 
+       aes(x = "", 
+           y = prop, 
+           fill = finish_status)) +
+  geom_bar(width = 1, 
+           stat = "identity", 
+           color = "black") +
+  geom_text(aes(y = lab.ypos, label = label), 
+            color = "black") +
+  coord_polar("y", 
+              start = 0, 
+              direction = -1) +
+  theme_void() +
+  theme(legend.position = "FALSE") +
+  labs(title = "Participants by Finish_Status")
+
+
+
+
+# Treemap by Result
+
+plotdata <- dat %>%
+  count(result)
+
+ggplot(plotdata, 
+       aes(fill = result, 
+           area = n, 
+           label = result)) +
+  geom_treemap() + 
+  geom_treemap_text(colour = "white", 
+                    place = "centre") +
+  labs(title = "Result") +
+  theme(legend.position = "none")
+
+
+
+
+
+
+#####################################################################################
+pairs(dat)
 
 model<-tree(class ~ .,data,mindev=1e-6,minsize=2)
 plot(model)
 text(model,cex=0.7)
 
+hclust(b)
+plot(hclust(dat$class))
+cor(finish_status2,prior_LOWER_EXTREMITY)
