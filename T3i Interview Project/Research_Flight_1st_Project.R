@@ -8,9 +8,11 @@ library(treemapify)
 
 dat<-read.csv("C:/SAS files/msk_ans_for_TS_with_key_delD.csv")
 
+table(dat$during_OTHER)
+table(dat$during_LOWER_EXTREMITY)
+table(dat$prior_Unspecified)
 
-
-y<-table(dat[,c(4,9)])
+y<-table(dat[,c(4,75)])
 y
 assocplot(y)
 
@@ -105,7 +107,7 @@ assocplot(b)
 
 assocplot(c)
 assocplot(y)
-mosai
+
 mosaicplot(a,shade = TRUE)
 
 #We can see that Class 19-004 stands out from the rest. There were more than 

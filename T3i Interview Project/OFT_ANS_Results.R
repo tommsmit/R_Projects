@@ -69,6 +69,8 @@ dat2_tree<-select(dat2_complete_pass,broadjump_inches:X3mileruck_seconds, total_
 
 dat2_tree2<-select(dat2_complete,broadjump_PF:overall_PF)
 
+dat2_tree2<-na.omit(dat2_tree2)
+
 ############################## Exploratory Data Analysis ###########################
 
 ggplot(dat2_complete,aes(x=total_oft_score, fill = prep_class)) + geom_bar()
